@@ -1,0 +1,77 @@
+---
+// Hero.astro - Premium hero with asymmetric layout
+---
+
+<section class="relative overflow-hidden py-24 sm:py-40">
+  <!-- Ambient background -->
+  <div class="absolute -top-96 right-0 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="space-y-10 text-center lg:space-y-12">
+      <!-- Badge -->
+      <div class="inline-block rounded-full border border-emerald-500/30 bg-slate-900/40 px-4 py-2">
+        <span class="text-sm font-semibold text-emerald-300">Orange County's Web Design & Automation Partner</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="animate-slide-up mx-auto max-w-5xl text-5xl font-bold tracking-tight text-slate-50 sm:text-6xl lg:text-7xl">
+        Custom Websites Built to Get You Found and Get You Calls
+      </h1>
+
+      <!-- Sub-headline: Software Engineering Advantage -->
+      <p class="animate-slide-up mx-auto max-w-3xl text-xl font-medium text-slate-300 delay-100 sm:text-2xl">
+        I build fast, custom-coded websites and booking/lead automation for Orange County, NY businesses across Middletown, Newburgh, and Warwick — no templates, no bloat.
+      </p>
+
+      <!-- Supporting statement -->
+      <p class="animate-fade-in mx-auto max-w-2xl text-lg text-slate-400 delay-200">
+        Every site is hand-built, fast-loading, and set up to rank in local Google search.
+      </p>
+
+      <!-- Dual CTA Buttons -->
+      <div class="animate-fade-in flex flex-col gap-4 sm:flex-row sm:justify-center delay-300">
+        <a
+          href="#contact"
+          class="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-8 py-4 text-lg font-bold text-slate-950 shadow-2xl shadow-emerald-500/30 transition hover:shadow-emerald-500/50 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-slate-950 active:scale-95"
+        >
+          <svg class="h-6 w-6 transition group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          Book Free Consultation
+        </a>
+        <a
+          href="#portfolio"
+          class="group inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-600 bg-slate-900/40 px-8 py-4 text-lg font-bold text-slate-100 transition hover:border-slate-400 hover:bg-slate-800/60 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-slate-400/50 focus:ring-offset-2 focus:ring-offset-slate-950 active:scale-95"
+        >
+          <svg class="h-6 w-6 transition group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          See Live Examples
+        </a>
+      </div>
+
+      <!-- Trust Signal -->
+      <div class="pt-8 border-t border-slate-800/50 mt-8">
+        <p class="text-sm text-slate-400 mb-4">5+ years of software engineering experience, now building for Orange County businesses</p>
+        <div class="flex flex-wrap justify-center gap-6 opacity-60">
+          <span class="text-slate-400 font-semibold">HVAC & Contractors</span>
+          <span class="text-slate-400 font-semibold">Restaurants & Bars</span>
+          <span class="text-slate-400 font-semibold">Auto Services</span>
+          <span class="text-slate-400 font-semibold">Retail & Clinics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+</style>

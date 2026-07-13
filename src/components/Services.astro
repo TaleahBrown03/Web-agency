@@ -1,0 +1,121 @@
+---
+// Services.astro - Pricing packages for Orange County Webworks
+import { PRICING_TIERS, PHONE_DISPLAY, PHONE_HREF } from '../data/pricing';
+
+const colorClasses = {
+  cyan: {
+    border: "border-cyan-400/30",
+    hoverBorder: "hover:border-cyan-400/60",
+    accent: "from-cyan-400/20",
+    glow: "shadow-cyan-400/10",
+    text: "text-cyan-400",
+    button: "border-cyan-400/50 bg-cyan-400/10 text-cyan-300 hover:bg-cyan-400/20 hover:border-cyan-400 focus:ring-cyan-400",
+  },
+  emerald: {
+    border: "border-emerald-400/30",
+    hoverBorder: "hover:border-emerald-400/60",
+    accent: "from-emerald-400/20",
+    glow: "shadow-emerald-400/10",
+    text: "text-emerald-400",
+    button: "border-emerald-400/50 bg-emerald-400/10 text-emerald-300 hover:bg-emerald-400/20 hover:border-emerald-400 focus:ring-emerald-400",
+  },
+  violet: {
+    border: "border-violet-400/30",
+    hoverBorder: "hover:border-violet-400/60",
+    accent: "from-violet-400/20",
+    glow: "shadow-violet-400/10",
+    text: "text-violet-400",
+    button: "border-violet-400/50 bg-violet-400/10 text-violet-300 hover:bg-violet-400/20 hover:border-violet-400 focus:ring-violet-400",
+  },
+} as const;
+---
+
+<section id="services" class="relative py-24 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 right-0 h-96 w-96 rounded-full bg-emerald-500/5 blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="mb-16 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-50 mb-6">
+        Packages & Pricing
+      </h2>
+      <p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        Custom-built sites, no templates. Pick the package that fits your business, or call and we'll figure out the right fit together.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {
+        PRICING_TIERS.map((tier) => {
+          const c = colorClasses[tier.color];
+          return (
+            <div
+              class={`group relative rounded-xl border-2 ${c.border} bg-gradient-to-b ${c.accent} to-transparent p-8 transition-all duration-500 ${c.hoverBorder} hover:shadow-2xl ${c.glow} ${
+                tier.highlight ? "md:scale-105 md:z-10" : ""
+              }`}
+            >
+              {tier.highlight && (
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-emerald-400/20 border border-emerald-400/50 rounded-full text-xs font-bold text-emerald-300">
+                  Most Popular
+                </div>
+              )}
+
+              <div class="mb-6">
+                <h3 class="text-2xl font-bold text-slate-100 mb-2">{tier.name}</h3>
+                <p class="text-slate-400 text-sm mb-3">{tier.targetAudience}</p>
+                <div class="flex items-baseline">
+                  <span class={`text-4xl font-bold ${c.text}`}>{tier.price}</span>
+                  <span class="text-slate-400 ml-2">one-time</span>
+                </div>
+              </div>
+
+              <p class="text-slate-300 text-sm mb-8 leading-relaxed">{tier.description}</p>
+
+              <ul class="space-y-3 mb-8">
+                {tier.features.map((feature) => (
+                  <li class="flex items-start gap-3">
+                    <svg class={`w-5 h-5 mt-0.5 flex-shrink-0 ${c.text}`} fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-slate-300 text-sm">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={PHONE_HREF}
+                class={`block w-full py-3 rounded-lg font-semibold text-center border-2 transition-all duration-300 focus:outline-none focus:ring-2 ${c.button}`}
+              >
+                Call Now: {PHONE_DISPLAY}
+              </a>
+            </div>
+          );
+        })
+      }
+    </div>
+
+    <p class="mt-8 text-center text-sm text-slate-400">
+      Want ongoing updates and hosting handled for you? Ask about a monthly care plan, starting at $50–$100/mo depending on scope.
+    </p>
+
+    <div class="mt-16 text-center">
+      <div class="inline-block rounded-lg border border-slate-700/50 bg-slate-900/50 p-8 max-w-2xl">
+        <h3 class="text-2xl font-bold text-slate-100 mb-4">Not sure which package fits?</h3>
+        <p class="text-slate-300 mb-6">
+          Tell me about your business and I'll recommend the right one — no pressure, no upsell.
+        </p>
+        <a
+          href={PHONE_HREF}
+          class="inline-block px-8 py-3 rounded-lg font-semibold bg-emerald-500/10 border border-emerald-400/50 text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+        >
+          Schedule Your Consultation
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

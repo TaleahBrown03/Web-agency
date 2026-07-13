@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#020617"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="0.5" stop-color="#6ee7b7"/>
+      <stop offset="1" stop-color="#c4b5fd"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#06b6d4"/>
+      <stop offset="0.5" stop-color="#10b981"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="120" cy="80" r="220" fill="#06b6d4" opacity="0.14"/>
+  <circle cx="1080" cy="560" r="260" fill="#7c3aed" opacity="0.14"/>
+  <circle cx="950" cy="110" r="160" fill="#10b981" opacity="0.12"/>
+
+  <svg x="100" y="110" width="72" height="72" viewBox="0 0 24 24">
+    <rect width="24" height="24" rx="6" fill="url(#mark)"/>
+    <path d="M13 10V3L4 14h7v7l9-11h-7z" fill="#ffffff"/>
+  </svg>
+
+  <text x="100" y="270" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#67e8f9" letter-spacing="4">ORANGE COUNTY</text>
+  <text x="100" y="330" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="800" fill="#f8fafc">Webworks</text>
+
+  <text x="100" y="400" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#cbd5e1">Custom Websites &amp; Automation for</text>
+  <text x="100" y="440" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#cbd5e1">Orange County, NY Businesses</text>
+
+  <text x="100" y="540" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="url(#brand)">100/100 Lighthouse · Custom Code · Local SEO</text>
+</svg>

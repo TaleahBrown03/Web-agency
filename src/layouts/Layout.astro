@@ -1,0 +1,61 @@
+---
+import '../styles/global.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Orange County Webworks - Custom Web Design, Development & Automation for Orange County, NY Businesses" } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Orange County Webworks",
+  url: Astro.site?.toString(),
+  telephone: "+1-845-445-9268",
+  priceRange: "$375-$875+",
+  description,
+  areaServed: [
+    { "@type": "City", name: "Middletown, NY" },
+    { "@type": "City", name: "Newburgh, NY" },
+    { "@type": "City", name: "Warwick, NY" },
+    { "@type": "AdministrativeArea", name: "Orange County, NY" },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL('/og-image.svg', Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/og-image.svg', Astro.site)} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body class="bg-slate-950 text-slate-100 font-sans antialiased">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-emerald-500 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-slate-950"
+    >
+      Skip to main content
+    </a>
+    <slot />
+  </body>
+</html>

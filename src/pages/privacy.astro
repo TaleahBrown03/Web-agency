@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import { PHONE_HREF, PHONE_DISPLAY } from '../data/pricing';
+---
+
+<Layout title="Privacy Policy | Orange County Webworks" description="How Orange County Webworks handles the information you share through this site.">
+  <Navigation />
+
+  <main id="main-content">
+    <section class="relative py-24 sm:py-32">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-bold tracking-tight text-slate-50 sm:text-5xl">Privacy Policy</h1>
+        <p class="mt-4 text-slate-400">Plain-language version, no legal jargon.</p>
+
+        <div class="mt-10 space-y-8 text-slate-300 leading-relaxed">
+          <div>
+            <h2 class="text-xl font-bold text-slate-100 mb-2">What I collect</h2>
+            <p>
+              When you submit the contact form on this site, I collect your name, email, business name, phone number, and whatever project details you type in. That information is sent through Formspree, a third-party form processing service, directly to my email inbox.
+            </p>
+            <p class="mt-3">
+              If you book a call using the scheduling calendar on this site, that booking is handled by Cal.com, a third-party scheduling service. Cal.com may set its own cookies to run the booking widget — I don't control that directly.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-bold text-slate-100 mb-2">Why I collect it</h2>
+            <p>
+              Only to respond to your inquiry, follow up about your project, and schedule a call if you request one. Nothing more.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-bold text-slate-100 mb-2">What I don't do</h2>
+            <p>
+              I don't sell your information, share it with advertisers, or use it for anything beyond responding to you.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-bold text-slate-100 mb-2">Questions</h2>
+            <p>
+              If you have any questions about this, call me directly at <a href={PHONE_HREF} class="text-emerald-400 hover:underline">{PHONE_DISPLAY}</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

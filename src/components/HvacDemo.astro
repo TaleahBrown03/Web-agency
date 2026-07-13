@@ -1,0 +1,87 @@
+---
+const services = ["Emergency Repair", "Boiler & Furnace", "Air Conditioning", "Indoor Air Quality"];
+const formFields = [
+  { label: "Zip Code", placeholder: "12550" },
+  { label: "Service Type", placeholder: "Furnace Repair" },
+  { label: "Phone", placeholder: "(845) 445-9268" }
+];
+---
+
+<div class="min-h-screen bg-slate-50 text-slate-900">
+  <div class="bg-orange-600 px-4 py-3 text-center text-sm font-semibold text-white">
+    24/7 Emergency Repair Available in the Hudson Valley
+  </div>
+
+  <header class="border-b border-slate-200 bg-white/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
+      <a href="/" class="text-lg font-semibold tracking-[0.28em] text-slate-800">HUDSON VALLEY HVAC</a>
+      <nav class="hidden items-center gap-7 text-sm font-medium text-slate-700 md:flex">
+        <a href="#services" class="transition hover:text-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-600 focus:ring-offset-2 active:text-sky-800">Services</a>
+        <a href="#estimate" class="transition hover:text-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-600 focus:ring-offset-2 active:text-sky-800">Estimate</a>
+        <a href="#contact" class="transition hover:text-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-600 focus:ring-offset-2 active:text-sky-800">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="mx-auto grid max-w-7xl gap-10 px-6 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-24">
+      <div class="space-y-8">
+        <div class="inline-flex items-center rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-medium text-sky-700">
+          Licensed, insured, and trusted by local homeowners and businesses
+        </div>
+        <div class="space-y-5">
+          <h1 class="max-w-3xl text-4xl font-black leading-tight tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+            Fast, dependable HVAC solutions for every season.
+          </h1>
+          <p class="max-w-2xl text-lg leading-8 text-slate-600">
+            From urgent repairs to planned replacements, our team delivers professional service with transparent pricing and disciplined execution.
+          </p>
+        </div>
+        <div id="services" class="flex flex-wrap gap-3">
+          {services.map((service) => (
+            <span class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700">
+              {service}
+            </span>
+          ))}
+        </div>
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-[0_30px_120px_-40px_rgba(15,23,42,0.28)]">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-slate-500">Priority service</p>
+          <p class="mt-3 text-2xl font-semibold text-slate-900">Same-day diagnostics and clear communication from first call to final inspection.</p>
+        </div>
+      </div>
+
+      <div id="estimate" class="rounded-[2rem] border border-slate-200 bg-slate-900 p-8 text-white shadow-[0_30px_120px_-35px_rgba(2,8,23,0.65)]">
+        <div class="space-y-6">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-sky-300">Instant estimate</p>
+            <h2 class="mt-3 text-3xl font-semibold">Get a fast quote in under 60 seconds</h2>
+          </div>
+          <div class="space-y-4">
+            {formFields.map((field) => (
+              <label class="block text-sm font-medium text-slate-200">
+                <span class="mb-2 block">{field.label}</span>
+                <input
+                  type={field.label === "Phone" ? "tel" : "text"}
+                  placeholder={field.placeholder}
+                  class="w-full rounded-2xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white outline-none transition duration-300 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/30"
+                />
+              </label>
+            ))}
+          </div>
+          <button class="inline-flex w-full items-center justify-center rounded-2xl bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-900 active:scale-[0.99]">
+            Start My Estimate
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="border-t border-slate-200 bg-white/90">
+    <div class="mx-auto flex flex-col gap-6 px-6 py-10 text-center text-sm text-slate-600 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <p>Serving homes and commercial spaces throughout the Hudson Valley with responsive, professional HVAC support.</p>
+      <a href="tel:+18454459268" class="inline-flex items-center justify-center rounded-full bg-sky-700 px-6 py-3 font-semibold text-white transition duration-300 hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 active:scale-[0.99]">
+        Call (845) 445-9268
+      </a>
+    </div>
+  </footer>
+</div>

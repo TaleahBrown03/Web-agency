@@ -1,0 +1,80 @@
+---
+const vehicleOptions = ["Year", "Make", "Model"];
+const highlights = ["Performance tires", "All-season options", "Brake service"];
+---
+
+<div class="min-h-screen bg-zinc-950 text-zinc-100">
+  <header class="border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-5 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.34em] text-cyan-400">Orange County Auto</p>
+        <h1 class="text-xl font-black tracking-wide text-white">RACE READY SERVICE</h1>
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <a href="tel:+18454459268" class="inline-flex items-center rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-sm font-semibold text-cyan-300 transition duration-300 hover:border-cyan-400 hover:bg-cyan-500/20 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-zinc-950 active:scale-[0.99]">
+          Call Now
+        </a>
+        <a href="#quote" class="inline-flex items-center rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-300 transition duration-300 hover:border-red-400 hover:bg-red-500/20 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-zinc-950 active:scale-[0.99]">
+          Book Service
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 lg:px-8 lg:py-24">
+    <section class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+      <div class="space-y-8">
+        <div class="inline-flex items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-300">
+          Precision service for daily drivers and weekend performance builds
+        </div>
+        <div class="space-y-5">
+          <h2 class="max-w-3xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Orange County's Trusted Tire & Auto Repair Experts
+          </h2>
+          <p class="max-w-2xl text-lg leading-8 text-zinc-400">
+            From rapid tire replacements to full diagnostics, our team combines premium parts, aggressive attention to detail, and high-performance service standards.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          {highlights.map((item) => (
+            <span class="rounded-full border border-zinc-800 bg-zinc-900/70 px-4 py-2 text-sm font-medium text-zinc-300">
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div id="quote" class="rounded-[2rem] border border-zinc-800 bg-zinc-900/90 p-8 shadow-[0_30px_120px_-40px_rgba(34,211,238,0.2)]">
+        <div class="space-y-6">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-400">Vehicle match</p>
+            <h3 class="mt-3 text-3xl font-semibold text-white">Find the right fit fast</h3>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-3">
+            {vehicleOptions.map((option) => (
+              <label class="block text-sm font-medium text-zinc-300">
+                <span class="mb-2 block">{option}</span>
+                <div class="flex items-center justify-between rounded-2xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-zinc-300 transition duration-300 hover:border-cyan-500/40">
+                  <span>Select</span>
+                  <span class="text-cyan-400">▾</span>
+                </div>
+              </label>
+            ))}
+          </div>
+          <button class="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-500 to-red-500 px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-zinc-950 active:scale-[0.99]">
+            Build My Service Quote
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-zinc-800 bg-zinc-950/70">
+    <div class="mx-auto flex flex-col gap-6 px-6 py-10 text-center text-sm text-zinc-400 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <p>High-performance repairs and tire services for Orange County drivers.</p>
+      <a href="tel:+18454459268" class="inline-flex items-center justify-center rounded-full border border-cyan-500/30 bg-cyan-500/10 px-6 py-3 font-semibold text-cyan-300 transition duration-300 hover:border-cyan-400 hover:bg-cyan-500/20 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-zinc-950 active:scale-[0.99]">
+        Call (845) 445-9268
+      </a>
+    </div>
+  </footer>
+</div>

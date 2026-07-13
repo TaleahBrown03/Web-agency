@@ -1,0 +1,100 @@
+---
+// Navigation.astro - Glassmorphic premium navbar
+import { PHONE_DISPLAY as phoneNumber, PHONE_HREF as phoneHref } from '../data/pricing';
+---
+
+<nav class="sticky top-0 z-50 border-b border-white/5 bg-slate-950/50 backdrop-blur-xl">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between py-4">
+      <!-- Logo/Brand -->
+      <a href="/" aria-label="Orange County Webworks - Home" class="group flex items-center gap-3 transition-all hover:scale-105">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 via-emerald-500 to-violet-600 shadow-lg shadow-emerald-500/20">
+          <svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <div class="hidden sm:flex flex-col">
+          <span class="text-sm font-bold bg-gradient-to-r from-cyan-300 to-emerald-300 bg-clip-text text-transparent">Orange County</span>
+          <span class="text-lg font-bold text-slate-50 group-hover:from-emerald-300 group-hover:to-cyan-300">Webworks</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links - Hidden on mobile -->
+      <div class="hidden items-center gap-12 md:flex">
+        <a href="#portfolio" class="text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg">Portfolio</a>
+        <a href="#about" class="text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg">About</a>
+        <a href="#services" class="text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg">Services</a>
+        <a href="#contact" class="text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Call Now Button -->
+        <a
+          href={phoneHref}
+          class="group inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 px-5 py-2.5 font-semibold text-emerald-200 shadow-lg shadow-emerald-500/10 transition hover:border-emerald-400/60 hover:from-emerald-500/20 hover:to-cyan-500/20 hover:shadow-emerald-500/20 focus:outline-none focus:ring-2 focus:ring-emerald-400/50 focus:ring-offset-2 focus:ring-offset-slate-950 active:scale-95"
+          aria-label="Call now"
+        >
+          <svg class="h-5 w-5 transition group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <span class="hidden sm:inline">{phoneNumber}</span>
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button
+          id="mobile-menu-toggle"
+          type="button"
+          class="inline-flex items-center justify-center rounded-xl border border-slate-700/60 bg-slate-900/40 p-2.5 text-slate-200 transition hover:border-slate-500 hover:bg-slate-800/60 focus:outline-none focus:ring-2 focus:ring-emerald-400/50 md:hidden"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          aria-label="Toggle navigation menu"
+        >
+          <svg id="mobile-menu-icon-open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="mobile-menu-icon-close" class="hidden h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu" class="hidden border-t border-white/5 pb-6 md:hidden">
+      <div class="flex flex-col gap-1 pt-4">
+        <a href="#portfolio" class="rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100">Portfolio</a>
+        <a href="#about" class="rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100">About</a>
+        <a href="#services" class="rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100">Services</a>
+        <a href="#contact" class="rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100">Contact</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  function initMobileMenu() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('mobile-menu-icon-open');
+    const iconClose = document.getElementById('mobile-menu-icon-close');
+    if (!toggle || !menu || !iconOpen || !iconClose) return;
+
+    const setOpen = (open) => {
+      menu.classList.toggle('hidden', !open);
+      iconOpen.classList.toggle('hidden', open);
+      iconClose.classList.toggle('hidden', !open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+
+    toggle.addEventListener('click', () => {
+      setOpen(menu.classList.contains('hidden'));
+    });
+
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initMobileMenu);
+  document.addEventListener('astro:after-swap', initMobileMenu);
+</script>

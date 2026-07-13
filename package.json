@@ -1,0 +1,20 @@
+{
+  "name": "web-agency",
+  "version": "1.0.0",
+  "description": "High-performance agency landing page for Software Developer",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "astro": "latest"
+  },
+  "devDependencies": {
+    "@astrojs/tailwind": "latest",
+    "tailwindcss": "latest"
+  }
+}

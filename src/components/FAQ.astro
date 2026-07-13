@@ -1,0 +1,65 @@
+---
+// FAQ.astro - Answers common objections before someone has to call to ask
+const faqs = [
+  {
+    question: "How long does it take to build my site?",
+    answer:
+      "Single-page sites are typically ready in 24-48 hours. Multi-page and automated builds usually take 36-72 hours, depending on scope and how quickly you can get me your content (photos, service list, pricing, etc.).",
+  },
+  {
+    question: "Do I own the website when it's done?",
+    answer:
+      "Yes. Once your project is paid in full, the code and design are yours.",
+  },
+  {
+    question: "What if I don't like the design?",
+    answer:
+      "We'll talk through your business and goals before I start building anything, and you'll see the site before it goes live so we can make adjustments together.",
+  },
+  {
+    question: "Do you handle hosting and my domain?",
+    answer:
+      "I can help you set up hosting and connect your domain, or work with what you already have. Ongoing hosting and updates are covered by the optional monthly care plan.",
+  },
+  {
+    question: "What's included in the monthly care plan?",
+    answer:
+      "Ongoing hosting, small content updates, and uptime monitoring — starting at $50-$100/month depending on your site's scope. It's optional, not required.",
+  },
+  {
+    question: "I don't know exactly what I want yet — can you still help?",
+    answer:
+      "Yes — that's what the free consultation is for. We'll talk through your business and I'll recommend the right starting point.",
+  },
+];
+---
+
+<section id="faq" class="relative py-24 sm:py-32">
+  <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+    <div class="mb-12 text-center">
+      <h2 class="text-4xl font-bold tracking-tight text-slate-50 sm:text-5xl">
+        Common Questions
+      </h2>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map((faq) => (
+        <details class="group rounded-xl border border-slate-700/50 bg-slate-900/30 p-6 open:bg-slate-900/50">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-slate-100 marker:content-none">
+            {faq.question}
+            <svg
+              class="h-5 w-5 flex-shrink-0 text-emerald-400 transition-transform duration-300 group-open:rotate-180"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="mt-4 text-slate-300 leading-relaxed">{faq.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

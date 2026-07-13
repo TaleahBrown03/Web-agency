@@ -1,0 +1,417 @@
+---
+import { PRICING_TIERS } from '../data/pricing';
+
+const tierById = Object.fromEntries(PRICING_TIERS.map((t) => [t.id, t]));
+const packageLabel = (tierId: string) => {
+  const tier = tierById[tierId];
+  return `${tier.price} ${tier.sizeLabel}`;
+};
+
+const demos = [
+  {
+    id: 'cleaning',
+    label: 'Cleaning Services',
+    tierId: 'starter',
+    route: '/demos/cleaning',
+    domain: 'ocwebworks.com/demos/cleaning',
+    eyebrow: 'Fresh • Premium • Local Lead Gen',
+    title: 'Flawless House & Commercial Cleaning in Orange County.',
+    description:
+      'A polished, high-trust experience designed to convert homeowners and property managers with fast clarity and premium visuals.',
+    navItems: ['Services', 'Pricing', 'Contact'],
+    primaryCta: 'Get a Free Quote Now',
+    secondaryCta: 'Book a Visit',
+    accent: 'emerald',
+  },
+  {
+    id: 'hvac',
+    label: 'HVAC Contractor',
+    tierId: 'growth',
+    route: '/demos/hvac',
+    domain: 'ocwebworks.com/demos/hvac',
+    eyebrow: 'Trusted • Responsive • Emergency Focus',
+    title: 'Reliable Heating & Air Conditioning Services.',
+    description:
+      'A confident, conversion-first layout built to support urgent service calls and premium seasonal campaigns.',
+    navItems: ['Emergency', 'Services', 'Reviews'],
+    primaryCta: 'Request Free Estimate',
+    secondaryCta: 'Call Now',
+    accent: 'sky',
+  },
+  {
+    id: 'auto',
+    label: 'Auto & Tire Shop',
+    tierId: 'automated',
+    route: '/demos/tire',
+    domain: 'ocwebworks.com/demos/tire',
+    eyebrow: 'Performance • Tech • High Intent',
+    title: 'Orange County\'s Trusted Tire & Auto Repair Experts.',
+    description:
+      'A bold, high-impact experience for shops that need a premium digital presence with fast, guided lead capture.',
+    navItems: ['Services', 'Tires', 'Contact'],
+    primaryCta: 'Find Your Tires Now',
+    secondaryCta: 'Book Service',
+    accent: 'red',
+  },
+];
+---
+
+<section id="portfolio" class="relative overflow-hidden bg-slate-950 py-24 sm:py-32">
+  <div class="absolute -top-32 left-1/3 h-96 w-96 rounded-full bg-cyan-500/5 blur-3xl" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <div class="max-w-2xl">
+        <div class="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-slate-900/40 px-4 py-2 text-sm font-semibold text-cyan-200">
+          <span>Live Demos</span>
+        </div>
+        <h2 class="mt-5 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          Interactive previews built for premium local service brands.
+        </h2>
+        <p class="mt-4 text-lg leading-8 text-slate-300 sm:text-xl">
+          Each layout is tuned for a specific package tier, blending responsive structure, conversion-focused details, and a luxury finish that fits Orange County Webworks.
+        </p>
+      </div>
+      <div class="rounded-2xl border border-slate-800/80 bg-slate-900/70 p-5 text-sm text-slate-300 shadow-2xl shadow-black/30 backdrop-blur">
+        <p class="font-semibold text-white">Why this matters to you</p>
+        <ul class="mt-3 space-y-2">
+          <li>• See exactly what your business gets at each price point</li>
+          <li>• Every page loads fast and looks right on any phone</li>
+          <li>• Click through to the full live page below</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 overflow-hidden rounded-[32px] border border-slate-800/80 bg-slate-900/70 shadow-2xl shadow-black/30 backdrop-blur">
+      <div class="border-b border-slate-800/80 px-3 py-3 sm:px-4 sm:py-4 lg:px-6">
+        <div class="flex flex-wrap gap-2" role="tablist" aria-label="Live demo previews">
+          {demos.map((demo, index) => (
+            <button
+              type="button"
+              class:list={[
+                'group inline-flex items-center gap-3 rounded-2xl border px-4 py-3 text-left transition duration-300 hover:-translate-y-0.5 hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-cyan-400/60 sm:px-5',
+                index === 0
+                  ? 'border-cyan-400/70 bg-cyan-500/12 text-white shadow-lg shadow-cyan-500/10'
+                  : 'border-slate-700/80 bg-slate-950/70 text-slate-300 hover:border-slate-500 hover:bg-slate-800/80',
+              ]}
+              data-demo-tab={demo.id}
+              role="tab"
+              aria-selected={index === 0}
+              tabindex={index === 0 ? 0 : -1}
+            >
+              <span class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-white/5">
+                {demo.id === 'cleaning' && (
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+                  </svg>
+                )}
+                {demo.id === 'hvac' && (
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-width="1.5" d="M12 3v18M6.5 6.5l11 11M6.5 17.5l11-11M3 12h18" />
+                  </svg>
+                )}
+                {demo.id === 'auto' && (
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13l1.65-4.95A2 2 0 016.55 6.7h10.9a2 2 0 011.9 1.35L21 13m-18 0v5a1 1 0 001 1h1a1 1 0 001-1v-1h12v1a1 1 0 001 1h1a1 1 0 001-1v-5m-18 0h18M7 16.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.5 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                  </svg>
+                )}
+              </span>
+              <span class="flex flex-col">
+                <span class="text-sm font-semibold">{demo.label}</span>
+                <span class="text-xs text-slate-400">{packageLabel(demo.tierId)}</span>
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="p-3 sm:p-4 lg:p-6">
+        {demos.map((demo, index) => (
+          <div
+            class:list={['demo-panel', index === 0 ? 'block' : 'hidden']}
+            data-demo-panel={demo.id}
+            role="tabpanel"
+            aria-labelledby={`tab-${demo.id}`}
+            hidden={index !== 0}
+          >
+            {demo.id === 'cleaning' && (
+              <div class="rounded-[28px] border border-emerald-200/50 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 p-4 shadow-inner shadow-emerald-100/70 sm:p-6 lg:p-8">
+                <header class="flex flex-wrap items-center justify-between gap-4 border-b border-emerald-100 pb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-600 text-lg font-semibold text-white shadow-lg shadow-emerald-600/20">OC</div>
+                    <div>
+                      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">Orange County Webworks</p>
+                      <p class="text-sm text-emerald-700/70">Premium local presence</p>
+                    </div>
+                  </div>
+                  <nav class="hidden items-center gap-6 text-sm font-semibold text-emerald-800 md:flex">
+                    {['Services', 'Pricing', 'Contact'].map((item) => <a class="transition hover:text-emerald-600" href="#">{item}</a>)}
+                  </nav>
+                  <a href="#contact" class="rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:scale-105 hover:bg-emerald-700">Call Now</a>
+                </header>
+
+                <div class="mt-4 flex items-center gap-3 rounded-full border border-emerald-200 bg-white/70 px-4 py-2">
+                  <span class="flex gap-1.5">
+                    <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-yellow-400"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-green-400"></span>
+                  </span>
+                  <span class="flex items-center gap-1 text-xs font-medium text-emerald-800/80">
+                    <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" /></svg>
+                    {demo.domain}
+                  </span>
+                </div>
+
+                <main class="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+                  <div>
+                    <p class="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-600">{demo.eyebrow}</p>
+                    <h3 class="mt-3 max-w-2xl text-3xl font-bold leading-tight text-emerald-950 sm:text-4xl lg:text-5xl">
+                      {demo.title}
+                    </h3>
+                    <p class="mt-4 max-w-xl text-lg leading-8 text-emerald-800/80">
+                      {demo.description}
+                    </p>
+                    <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+                      <a href="#contact" class="inline-flex items-center justify-center rounded-2xl bg-emerald-600 px-6 py-3.5 text-base font-semibold text-white transition hover:scale-105 hover:bg-emerald-700">
+                        {demo.primaryCta}
+                      </a>
+                      <a href="#services" class="inline-flex items-center justify-center rounded-2xl border border-emerald-300 bg-white/80 px-6 py-3.5 text-base font-semibold text-emerald-800 transition hover:scale-105 hover:border-emerald-400">
+                        {demo.secondaryCta}
+                      </a>
+                    </div>
+                    <div class="mt-8 flex flex-wrap gap-4 text-sm font-medium text-emerald-700/80">
+                      <span class="rounded-full border border-emerald-200 bg-white/80 px-3 py-2">Same-Day Quotes</span>
+                      <span class="rounded-full border border-emerald-200 bg-white/80 px-3 py-2">Bonded & Insured</span>
+                      <span class="rounded-full border border-emerald-200 bg-white/80 px-3 py-2">5-Star Local Reviews</span>
+                    </div>
+                  </div>
+
+                  <div class="rounded-[24px] border border-emerald-200 bg-white/80 p-4 shadow-xl shadow-emerald-100/60 sm:p-6">
+                    <p class="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-600">Flat-rate service menu</p>
+                    <div class="mt-4 space-y-3">
+                      {[
+                        ['Apartment Clean', '$99'],
+                        ['Standard Home', '$149'],
+                        ['Deep Move-Out', '$249'],
+                      ].map(([name, price]) => (
+                        <div class="flex items-center justify-between rounded-2xl border border-emerald-100 bg-emerald-50/70 px-4 py-3">
+                          <div>
+                            <p class="font-semibold text-emerald-900">{name}</p>
+                            <p class="text-sm text-emerald-700/70">Includes supplies & finishing touch</p>
+                          </div>
+                          <span class="rounded-full bg-emerald-600 px-3 py-1 text-sm font-semibold text-white">{price}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div class="lg:col-span-2">
+                    <a href={demo.route} class="inline-flex items-center gap-2 rounded-2xl bg-emerald-700 px-6 py-3.5 text-base font-semibold text-white transition hover:scale-105 hover:bg-emerald-800">
+                      View the Full Live Page →
+                    </a>
+                    <span class="ml-3 text-sm font-medium text-emerald-700/70">{packageLabel(demo.tierId)}</span>
+                  </div>
+                </main>
+              </div>
+            )}
+
+            {demo.id === 'hvac' && (
+              <div class="rounded-[28px] border border-slate-200 bg-slate-50 p-4 shadow-inner shadow-slate-200/70 sm:p-6 lg:p-8">
+                <div class="rounded-2xl bg-slate-900 px-4 py-3 text-center text-sm font-semibold text-orange-300 sm:px-6">
+                  24/7 Emergency Repair Available in the Hudson Valley — Call Now
+                </div>
+
+                <div class="mt-4 flex items-center gap-3 rounded-full border border-slate-200 bg-white px-4 py-2">
+                  <span class="flex gap-1.5">
+                    <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-yellow-400"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-green-400"></span>
+                  </span>
+                  <span class="flex items-center gap-1 text-xs font-medium text-slate-500">
+                    <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" /></svg>
+                    {demo.domain}
+                  </span>
+                </div>
+
+                <main class="mt-6 grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+                  <div class="space-y-4">
+                    <div class="inline-flex rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-sm font-semibold text-sky-700">{demo.eyebrow}</div>
+                    <h3 class="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl lg:text-5xl">
+                      {demo.title}
+                    </h3>
+                    <p class="max-w-xl text-lg leading-8 text-slate-600">
+                      {demo.description}
+                    </p>
+                    <div class="flex flex-wrap gap-3 text-sm font-medium text-slate-600">
+                      <span class="rounded-full bg-white px-3 py-2 shadow-sm">Certified Techs</span>
+                      <span class="rounded-full bg-white px-3 py-2 shadow-sm">Same-Day Service</span>
+                      <span class="rounded-full bg-white px-3 py-2 shadow-sm">Flexible Financing</span>
+                    </div>
+                  </div>
+
+                  <div class="rounded-[24px] border border-slate-200 bg-white p-4 shadow-xl shadow-slate-200/70 sm:p-6">
+                    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Free estimate request</p>
+                    <div class="mt-4 space-y-3">
+                      <div>
+                        <label class="mb-2 block text-sm font-semibold text-slate-700">Zip Code</label>
+                        <input class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-800 outline-none ring-0 transition focus:border-sky-400" placeholder="12550" />
+                      </div>
+                      <div>
+                        <label class="mb-2 block text-sm font-semibold text-slate-700">Service Type</label>
+                        <select class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-800 outline-none transition focus:border-sky-400">
+                          <option>Heating Repair</option>
+                          <option>Air Conditioning</option>
+                          <option>Maintenance Plan</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label class="mb-2 block text-sm font-semibold text-slate-700">Phone Number</label>
+                        <input class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-800 outline-none transition focus:border-sky-400" placeholder="(845) 555-0148" />
+                      </div>
+                      <button class="w-full rounded-2xl bg-orange-500 px-4 py-3.5 text-base font-semibold text-white transition hover:scale-[1.01] hover:bg-orange-600">
+                        {demo.primaryCta}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="lg:col-span-2">
+                    <a href={demo.route} class="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-6 py-3.5 text-base font-semibold text-white transition hover:scale-105 hover:bg-slate-800">
+                      View the Full Live Page →
+                    </a>
+                    <span class="ml-3 text-sm font-medium text-slate-500">{packageLabel(demo.tierId)}</span>
+                  </div>
+                </main>
+              </div>
+            )}
+
+            {demo.id === 'auto' && (
+              <div class="rounded-[28px] border border-zinc-800 bg-zinc-950 p-4 text-white shadow-inner shadow-black/50 sm:p-6 lg:p-8">
+                <header class="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-800 pb-4">
+                  <div>
+                    <p class="text-sm font-semibold uppercase tracking-[0.25em] text-red-400">Performance Auto</p>
+                    <p class="text-sm text-zinc-400">Expert tire & repair service</p>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <a href="#contact" class="rounded-full border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-semibold text-zinc-100 transition hover:border-red-500 hover:text-red-400">Call Now</a>
+                    <a href="#contact" class="rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:scale-105 hover:bg-red-500">Book Service</a>
+                  </div>
+                </header>
+
+                <div class="mt-4 flex items-center gap-3 rounded-full border border-zinc-800 bg-zinc-900 px-4 py-2">
+                  <span class="flex gap-1.5">
+                    <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-yellow-400"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-green-400"></span>
+                  </span>
+                  <span class="flex items-center gap-1 text-xs font-medium text-zinc-400">
+                    <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" /></svg>
+                    {demo.domain}
+                  </span>
+                </div>
+
+                <main class="mt-6 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+                  <div>
+                    <div class="inline-flex rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-sm font-semibold text-cyan-300">{demo.eyebrow}</div>
+                    <h3 class="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+                      {demo.title}
+                    </h3>
+                    <p class="mt-4 max-w-xl text-lg leading-8 text-zinc-400">
+                      {demo.description}
+                    </p>
+                    <div class="mt-7 flex flex-wrap gap-3">
+                      <span class="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-300">Same-Day Install</span>
+                      <span class="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-300">Wheel Alignment</span>
+                      <span class="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-300">Digital Inspection</span>
+                    </div>
+                  </div>
+
+                  <div class="rounded-[24px] border border-zinc-800 bg-zinc-900/90 p-4 shadow-2xl shadow-black/40 sm:p-6">
+                    <p class="text-sm font-semibold uppercase tracking-[0.25em] text-zinc-400">Find the right fit fast</p>
+                    <div class="mt-4 space-y-3">
+                      {['Year', 'Make', 'Model'].map((label) => (
+                        <div>
+                          <label class="mb-2 block text-sm font-semibold text-zinc-300">{label}</label>
+                          <div class="flex items-center justify-between rounded-2xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-zinc-400">
+                            <span>Select {label}</span>
+                            <span class="text-lg">▾</span>
+                          </div>
+                        </div>
+                      ))}
+                      <button class="mt-2 w-full rounded-2xl bg-gradient-to-r from-red-600 via-red-500 to-cyan-500 px-4 py-3.5 text-base font-semibold text-white transition hover:scale-[1.01] hover:shadow-lg hover:shadow-cyan-500/20">
+                        {demo.primaryCta}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="lg:col-span-2">
+                    <a href={demo.route} class="inline-flex items-center gap-2 rounded-2xl border border-zinc-700 bg-zinc-900 px-6 py-3.5 text-base font-semibold text-white transition hover:scale-105 hover:border-cyan-500/50">
+                      View the Full Live Page →
+                    </a>
+                    <span class="ml-3 text-sm font-medium text-zinc-400">{packageLabel(demo.tierId)}</span>
+                  </div>
+                </main>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll('[data-demo-tab]'));
+  const panels = Array.from(document.querySelectorAll('[data-demo-panel]'));
+
+  if (tabs.length > 0) {
+    const activateTab = (tabId) => {
+      tabs.forEach((tab) => {
+        const isActive = tab.dataset.demoTab === tabId;
+        tab.setAttribute('aria-selected', String(isActive));
+        tab.setAttribute('tabindex', isActive ? '0' : '-1');
+        tab.classList.toggle('border-cyan-400/70', isActive);
+        tab.classList.toggle('bg-cyan-500/12', isActive);
+        tab.classList.toggle('text-white', isActive);
+        tab.classList.toggle('shadow-lg', isActive);
+        tab.classList.toggle('shadow-cyan-500/10', isActive);
+        tab.classList.toggle('border-slate-700/80', !isActive);
+        tab.classList.toggle('bg-slate-950/70', !isActive);
+        tab.classList.toggle('text-slate-300', !isActive);
+      });
+
+      panels.forEach((panel) => {
+        const isActive = panel.dataset.demoPanel === tabId;
+        panel.classList.toggle('hidden', !isActive);
+        panel.classList.toggle('block', isActive);
+        panel.hidden = !isActive;
+      });
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activateTab(tab.dataset.demoTab));
+      tab.addEventListener('keydown', (event) => {
+        const currentIndex = index;
+        let nextIndex = currentIndex;
+
+        if (event.key === 'ArrowRight') {
+          nextIndex = (currentIndex + 1) % tabs.length;
+        } else if (event.key === 'ArrowLeft') {
+          nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+        } else if (event.key === 'Home') {
+          nextIndex = 0;
+        } else if (event.key === 'End') {
+          nextIndex = tabs.length - 1;
+        } else {
+          return;
+        }
+
+        event.preventDefault();
+        const nextTab = tabs[nextIndex];
+        nextTab.focus();
+        activateTab(nextTab.dataset.demoTab);
+      });
+    });
+
+    activateTab(tabs[0].dataset.demoTab);
+  }
+</script>
