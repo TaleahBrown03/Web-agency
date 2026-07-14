@@ -1,6 +1,6 @@
 ---
 // Services.astro - Pricing packages for Orange County Webworks
-import { PRICING_TIERS, PHONE_DISPLAY, PHONE_HREF } from '../data/pricing';
+import { PRICING_TIERS, PHONE_DISPLAY, PHONE_HREF, CARE_PLAN_PRICE } from '../data/pricing';
 
 const colorClasses = {
   cyan: {
@@ -100,7 +100,11 @@ const colorClasses = {
     </div>
 
     <p class="mt-8 text-center text-sm text-slate-400">
-      Want ongoing updates and hosting handled for you? Ask about a monthly care plan, starting at $50–$100/mo depending on scope.
+      Want ongoing updates and hosting handled for you? Ask about a <a href="/services/care-plan" class="text-emerald-300 hover:underline font-semibold">monthly care plan</a>, starting at {CARE_PLAN_PRICE} depending on scope.
+    </p>
+
+    <p class="mt-4 text-center text-sm text-slate-400">
+      Looking for something specific? <a href="/services" class="text-emerald-300 hover:underline font-semibold">Explore all services</a> — including e-commerce, local SEO, brand-aligned design, booking automation, and ongoing care plans.
     </p>
 
     <div class="mt-16 text-center">

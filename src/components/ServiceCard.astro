@@ -1,0 +1,60 @@
+---
+// ServiceCard.astro - Shared card used on the Services and Locations hub pages
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  color?: "cyan" | "emerald" | "violet";
+  linkLabel?: string;
+  priceNote?: string;
+}
+
+const { title, description, href, color = "cyan", linkLabel = "Learn more", priceNote } = Astro.props;
+
+const colorClasses = {
+  cyan: {
+    border: "border-cyan-400/30",
+    hoverBorder: "hover:border-cyan-400/60",
+    accent: "from-cyan-400/20",
+    glow: "hover:shadow-cyan-400/10",
+    text: "text-cyan-300",
+  },
+  emerald: {
+    border: "border-emerald-400/30",
+    hoverBorder: "hover:border-emerald-400/60",
+    accent: "from-emerald-400/20",
+    glow: "hover:shadow-emerald-400/10",
+    text: "text-emerald-300",
+  },
+  violet: {
+    border: "border-violet-400/30",
+    hoverBorder: "hover:border-violet-400/60",
+    accent: "from-violet-400/20",
+    glow: "hover:shadow-violet-400/10",
+    text: "text-violet-300",
+  },
+} as const;
+
+const c = colorClasses[color];
+---
+
+<a
+  href={href}
+  class={`group relative flex flex-col rounded-xl border-2 ${c.border} bg-gradient-to-b ${c.accent} to-transparent p-8 transition-all duration-500 ${c.hoverBorder} hover:shadow-2xl ${c.glow}`}
+>
+  <div class="mb-3 flex items-start justify-between gap-3">
+    <h3 class="text-xl font-bold text-slate-100">{title}</h3>
+    {priceNote && (
+      <span class={`flex-shrink-0 rounded-full border ${c.border} bg-slate-950/40 px-3 py-1 text-xs font-bold ${c.text}`}>
+        {priceNote}
+      </span>
+    )}
+  </div>
+  <p class="text-slate-300 text-sm leading-relaxed mb-6 flex-1">{description}</p>
+  <span class={`inline-flex items-center gap-2 text-sm font-semibold ${c.text}`}>
+    {linkLabel}
+    <svg class="h-4 w-4 transition group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+      <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H4a1 1 0 110-2h8.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+    </svg>
+  </span>
+</a>

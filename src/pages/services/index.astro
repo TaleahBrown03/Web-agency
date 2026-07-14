@@ -1,0 +1,92 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCallBar from '../../components/MobileCallBar.astro';
+import PageHero from '../../components/PageHero.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { PRICING_TIERS, PHONE_DISPLAY, PHONE_HREF, CARE_PLAN_PRICE } from '../../data/pricing';
+
+const tierById = Object.fromEntries(PRICING_TIERS.map((t) => [t.id, t]));
+
+const services = [
+  {
+    title: 'Web Design',
+    description: 'Custom-coded Starter, Growth, and Automated sites — no templates, no page-builder bloat. Built to load fast and rank locally.',
+    href: '/services/web-design',
+    color: 'cyan' as const,
+    priceNote: `From ${tierById.starter.price}`,
+  },
+  {
+    title: 'E-Commerce',
+    description: 'Product catalogs and secure checkout built directly into your site, so customers can buy without leaving your domain.',
+    href: '/services/ecommerce',
+    color: 'emerald' as const,
+    priceNote: `From ${tierById.growth.price}`,
+  },
+  {
+    title: 'Local SEO',
+    description: 'Schema markup, Google Business Profile setup, and technical SEO fundamentals tuned for your specific Orange County service area.',
+    href: '/services/seo',
+    color: 'violet' as const,
+    priceNote: `Included from ${tierById.growth.price}`,
+  },
+  {
+    title: 'Brand-Aligned Design',
+    description: 'A cohesive visual identity — colors, type, layout language, and voice — built into your site so your business looks consistent everywhere.',
+    href: '/services/branding',
+    color: 'cyan' as const,
+    priceNote: 'Included in every package',
+  },
+  {
+    title: 'Booking & Lead Automation',
+    description: 'Live calendar booking, instant SMS lead alerts, and CRM integration so leads get followed up on automatically, not manually.',
+    href: '/services/automation',
+    color: 'emerald' as const,
+    priceNote: `From ${tierById.automated.price}`,
+  },
+  {
+    title: 'Ongoing Care Plan',
+    description: 'Hosting, small content updates, and uptime monitoring handled for you every month — optional, not required.',
+    href: '/services/care-plan',
+    color: 'violet' as const,
+    priceNote: CARE_PLAN_PRICE,
+  },
+];
+---
+
+<Layout title="Services | Orange County Webworks" description="Web design, e-commerce, local SEO, brand-aligned design, booking automation, and ongoing care plans for Orange County, NY businesses.">
+  <Navigation />
+  <main id="main-content" class="pb-20 md:pb-0">
+    <PageHero
+      eyebrow="What I Do"
+      title="Full-Service Web & Growth Support, Built by One Engineer"
+      subtitle="Every service below is delivered by the same person who writes the code — no account managers, no outsourced dev work. Just a faster path from 'no website' to 'booked jobs.'"
+    />
+
+    <section class="relative py-8 sm:py-12">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => <ServiceCard {...service} />)}
+        </div>
+
+        <div class="mt-16 text-center">
+          <div class="inline-block rounded-lg border border-slate-700/50 bg-slate-900/50 p-8 max-w-2xl">
+            <h2 class="text-2xl font-bold text-slate-100 mb-4">Not sure which service fits your business?</h2>
+            <p class="text-slate-300 mb-6">
+              Tell me about your business and I'll recommend the right starting point — no pressure, no upsell.
+            </p>
+            <a
+              href={PHONE_HREF}
+              class="inline-block px-8 py-3 rounded-lg font-semibold bg-emerald-500/10 border border-emerald-400/50 text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+            >
+              Call {PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <MobileCallBar />
+</Layout>

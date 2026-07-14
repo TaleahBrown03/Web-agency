@@ -9,7 +9,7 @@
       <stop offset="0.5" stop-color="#6ee7b7"/>
       <stop offset="1" stop-color="#c4b5fd"/>
     </linearGradient>
-    <linearGradient id="mark" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+    <linearGradient id="mark" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#06b6d4"/>
       <stop offset="0.5" stop-color="#10b981"/>
       <stop offset="1" stop-color="#7c3aed"/>
@@ -21,9 +21,9 @@
   <circle cx="1080" cy="560" r="260" fill="#7c3aed" opacity="0.14"/>
   <circle cx="950" cy="110" r="160" fill="#10b981" opacity="0.12"/>
 
-  <svg x="100" y="110" width="72" height="72" viewBox="0 0 24 24">
-    <rect width="24" height="24" rx="6" fill="url(#mark)"/>
-    <path d="M13 10V3L4 14h7v7l9-11h-7z" fill="#ffffff"/>
+  <svg x="100" y="110" width="72" height="72" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="19" fill="none" stroke="url(#mark)" stroke-width="3.5"/>
+    <path d="M13 18 L17.5 32 L24 20 L30.5 32 L35 18" stroke="url(#mark)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 
   <text x="100" y="270" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#67e8f9" letter-spacing="4">ORANGE COUNTY</text>

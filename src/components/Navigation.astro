@@ -1,6 +1,16 @@
 ---
 // Navigation.astro - Glassmorphic premium navbar
 import { PHONE_DISPLAY as phoneNumber, PHONE_HREF as phoneHref } from '../data/pricing';
+
+const serviceLinks = [
+  { label: 'All Services', href: '/services' },
+  { label: 'Web Design', href: '/services/web-design' },
+  { label: 'E-Commerce', href: '/services/ecommerce' },
+  { label: 'Local SEO', href: '/services/seo' },
+  { label: 'Brand-Aligned Design', href: '/services/branding' },
+  { label: 'Booking & Lead Automation', href: '/services/automation' },
+  { label: 'Care Plan', href: '/services/care-plan' },
+];
 ---
 
 <nav class="sticky top-0 z-50 border-b border-white/5 bg-slate-950/50 backdrop-blur-xl">
@@ -8,11 +18,17 @@ import { PHONE_DISPLAY as phoneNumber, PHONE_HREF as phoneHref } from '../data/p
     <div class="flex items-center justify-between py-4">
       <!-- Logo/Brand -->
       <a href="/" aria-label="Orange County Webworks - Home" class="group flex items-center gap-3 transition-all hover:scale-105">
-        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 via-emerald-500 to-violet-600 shadow-lg shadow-emerald-500/20">
-          <svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-        </div>
+        <svg class="h-11 w-11 flex-shrink-0" viewBox="0 0 48 48" aria-hidden="true">
+          <defs>
+            <linearGradient id="logo-ring-nav" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#22d3ee" />
+              <stop offset="0.5" stop-color="#10b981" />
+              <stop offset="1" stop-color="#8b5cf6" />
+            </linearGradient>
+          </defs>
+          <circle cx="24" cy="24" r="19" fill="none" stroke="url(#logo-ring-nav)" stroke-width="3.5" />
+          <path d="M13 18 L17.5 32 L24 20 L30.5 32 L35 18" stroke="url(#logo-ring-nav)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
         <div class="hidden sm:flex flex-col">
           <span class="text-sm font-bold bg-gradient-to-r from-cyan-300 to-emerald-300 bg-clip-text text-transparent">Orange County</span>
           <span class="text-lg font-bold text-slate-50 group-hover:from-emerald-300 group-hover:to-cyan-300">Webworks</span>
@@ -20,11 +36,39 @@ import { PHONE_DISPLAY as phoneNumber, PHONE_HREF as phoneHref } from '../data/p
       </a>
 
       <!-- Navigation Links - Hidden on mobile -->
-      <div class="hidden items-center gap-12 md:flex">
-        <a href="#portfolio" class="text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg">Portfolio</a>
-        <a href="#about" class="text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg">About</a>
-        <a href="#services" class="text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg">Services</a>
-        <a href="#contact" class="text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg">Contact</a>
+      <div class="hidden items-center gap-10 md:flex">
+        <!-- Services Dropdown -->
+        <div class="relative">
+          <button
+            type="button"
+            id="services-dropdown-toggle"
+            aria-controls="services-dropdown-panel"
+            aria-expanded="false"
+            class="flex items-center gap-1 text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg focus:outline-none"
+          >
+            Services
+            <svg class="h-4 w-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div
+            id="services-dropdown-panel"
+            class="absolute left-1/2 top-full hidden w-64 -translate-x-1/2 pt-3"
+          >
+            <div class="rounded-xl border border-white/10 bg-slate-900/95 p-2 shadow-2xl backdrop-blur-xl">
+              {serviceLinks.map((link) => (
+                <a href={link.href} class="block rounded-lg px-4 py-2.5 text-sm font-medium text-slate-300 transition hover:bg-slate-800/60 hover:text-slate-100">
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <a href="/locations" class="text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg">Locations</a>
+        <a href="/portfolio" class="text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg">Portfolio</a>
+        <a href="/about" class="text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg">About</a>
+        <a href="/contact" class="text-sm font-medium text-slate-400 transition hover:text-slate-100 hover:drop-shadow-lg">Contact</a>
       </div>
 
       <div class="flex items-center gap-3">
@@ -62,10 +106,31 @@ import { PHONE_DISPLAY as phoneNumber, PHONE_HREF as phoneHref } from '../data/p
     <!-- Mobile Menu Panel -->
     <div id="mobile-menu" class="hidden border-t border-white/5 pb-6 md:hidden">
       <div class="flex flex-col gap-1 pt-4">
-        <a href="#portfolio" class="rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100">Portfolio</a>
-        <a href="#about" class="rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100">About</a>
-        <a href="#services" class="rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100">Services</a>
-        <a href="#contact" class="rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100">Contact</a>
+        <!-- Mobile Services Accordion -->
+        <button
+          type="button"
+          id="mobile-services-toggle"
+          aria-controls="mobile-services-panel"
+          aria-expanded="false"
+          class="flex items-center justify-between rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100"
+        >
+          Services
+          <svg id="mobile-services-icon" class="h-5 w-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="mobile-services-panel" class="hidden flex-col gap-1 pl-4">
+          {serviceLinks.map((link) => (
+            <a href={link.href} class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400 transition hover:bg-slate-900/60 hover:text-slate-100">
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <a href="/locations" class="rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100">Locations</a>
+        <a href="/portfolio" class="rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100">Portfolio</a>
+        <a href="/about" class="rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100">About</a>
+        <a href="/contact" class="rounded-lg px-3 py-3 text-base font-medium text-slate-300 transition hover:bg-slate-900/60 hover:text-slate-100">Contact</a>
       </div>
     </div>
   </div>
@@ -79,7 +144,7 @@ import { PHONE_DISPLAY as phoneNumber, PHONE_HREF as phoneHref } from '../data/p
     const iconClose = document.getElementById('mobile-menu-icon-close');
     if (!toggle || !menu || !iconOpen || !iconClose) return;
 
-    const setOpen = (open) => {
+    const setOpen = (open: boolean) => {
       menu.classList.toggle('hidden', !open);
       iconOpen.classList.toggle('hidden', open);
       iconClose.classList.toggle('hidden', !open);
@@ -95,6 +160,53 @@ import { PHONE_DISPLAY as phoneNumber, PHONE_HREF as phoneHref } from '../data/p
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initMobileMenu);
-  document.addEventListener('astro:after-swap', initMobileMenu);
+  function initMobileServicesAccordion() {
+    const toggle = document.getElementById('mobile-services-toggle');
+    const panel = document.getElementById('mobile-services-panel');
+    const icon = document.getElementById('mobile-services-icon');
+    if (!toggle || !panel || !icon) return;
+
+    toggle.addEventListener('click', () => {
+      const isOpen = !panel.classList.contains('hidden');
+      panel.classList.toggle('hidden', isOpen);
+      panel.classList.toggle('flex', !isOpen);
+      icon.classList.toggle('rotate-180', !isOpen);
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+    });
+  }
+
+  function initServicesDropdown() {
+    const toggle = document.getElementById('services-dropdown-toggle');
+    const panel = document.getElementById('services-dropdown-panel');
+    if (!toggle || !panel) return;
+
+    const setOpen = (open: boolean) => {
+      panel.classList.toggle('hidden', !open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setOpen(panel.classList.contains('hidden'));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!panel.contains(e.target as Node) && e.target !== toggle) {
+        setOpen(false);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  }
+
+  function initNavigation() {
+    initMobileMenu();
+    initMobileServicesAccordion();
+    initServicesDropdown();
+  }
+
+  document.addEventListener('DOMContentLoaded', initNavigation);
+  document.addEventListener('astro:after-swap', initNavigation);
 </script>

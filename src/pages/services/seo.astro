@@ -1,0 +1,74 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCallBar from '../../components/MobileCallBar.astro';
+import PageHero from '../../components/PageHero.astro';
+import { PRICING_TIERS, PHONE_DISPLAY, PHONE_HREF } from '../../data/pricing';
+
+const tierById = Object.fromEntries(PRICING_TIERS.map((t) => [t.id, t]));
+
+const pillars = [
+  {
+    title: 'Technical foundation',
+    description: 'Fast load times, clean semantic HTML, and mobile-first layout — all ranking factors Google weighs directly, and all things a hand-coded site handles better than a template by default.',
+  },
+  {
+    title: 'Local structured data',
+    description: "Schema.org markup that tells Google exactly what your business is, where it's located, and which Orange County towns you serve — so you show up correctly in local search and maps results.",
+  },
+  {
+    title: 'Google Business Profile setup',
+    description: "Your website and your Google Business Profile need to agree with each other — same name, address, phone, and categories — or your local rankings suffer. I set this up correctly from day one.",
+  },
+  {
+    title: 'Location-aware content',
+    description: 'Pages written around the specific towns you serve (see our Locations pages) instead of generic copy that could apply to any town in America.',
+  },
+];
+---
+
+<Layout title="Local SEO | Orange County Webworks" description="Local SEO for Orange County, NY businesses: schema markup, Google Business Profile setup, and technical fundamentals that help you rank in local search.">
+  <Navigation />
+  <main id="main-content" class="pb-20 md:pb-0">
+    <PageHero
+      eyebrow="Local SEO"
+      title="Built to Rank Where Your Customers Are Actually Searching"
+      subtitle="Local SEO isn't a plugin you install after the fact — it's structural. Every site I build has these fundamentals in place from the start."
+    />
+
+    <div class="text-center -mt-4 mb-8">
+      <span class="inline-block rounded-full border border-cyan-400/30 bg-slate-900/40 px-4 py-2 text-sm font-bold text-cyan-300">
+        Included from {tierById.growth.price} (Growth tier and up)
+      </span>
+    </div>
+
+    <section class="relative py-8">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-8 sm:grid-cols-2">
+          {pillars.map((pillar) => (
+            <div class="rounded-xl border-2 border-cyan-400/30 bg-gradient-to-b from-cyan-400/10 to-transparent p-6">
+              <h3 class="text-lg font-bold text-slate-100 mb-2">{pillar.title}</h3>
+              <p class="text-slate-300 text-sm leading-relaxed">{pillar.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="mt-10 text-slate-300 leading-relaxed">
+          Local SEO is included in every Growth and Automated site — it's not sold as a separate add-on subscription with vague monthly "reporting." You get a site that's built correctly for local search from launch, plus a monthly performance check-in on the Growth tier and up.
+        </p>
+
+        <div class="mt-12 text-center">
+          <a
+            href={PHONE_HREF}
+            class="inline-block px-8 py-3 rounded-lg font-semibold bg-cyan-500/10 border border-cyan-400/50 text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          >
+            Call {PHONE_DISPLAY}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <MobileCallBar />
+</Layout>

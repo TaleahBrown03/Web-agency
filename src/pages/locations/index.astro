@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCallBar from '../../components/MobileCallBar.astro';
+import PageHero from '../../components/PageHero.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+
+const locations = await getCollection('locations');
+const colors = ['cyan', 'emerald', 'violet'] as const;
+---
+
+<Layout title="Areas We Serve | Orange County Webworks" description="Local web design and SEO for Middletown, Goshen, Warwick, Newburgh, West Point, Harriman, and Monroe, NY.">
+  <Navigation />
+  <main id="main-content" class="pb-20 md:pb-0">
+    <PageHero
+      eyebrow="Areas We Serve"
+      title="Local Knowledge, Not Just a Local Phone Number"
+      subtitle="I'm based in Orange County, NY — I'm not learning your town's layout from a spreadsheet. Here's where I build for businesses across the county."
+    />
+
+    <section class="relative py-8">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {locations.map((location, index) => (
+            <ServiceCard
+              title={location.data.name}
+              description={location.data.region}
+              href={`/locations/${location.id}`}
+              color={colors[index % colors.length]}
+              linkLabel={`See ${location.data.name} page`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <MobileCallBar />
+</Layout>

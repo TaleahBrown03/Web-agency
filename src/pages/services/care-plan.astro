@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCallBar from '../../components/MobileCallBar.astro';
+import PageHero from '../../components/PageHero.astro';
+import { PHONE_DISPLAY, PHONE_HREF, CARE_PLAN_PRICE } from '../../data/pricing';
+
+const features = [
+  { title: 'Hosting handled', description: "Your site stays hosted and online — you don't have to think about servers, renewals, or configuration." },
+  { title: 'Small content updates', description: 'Text changes, new photos, updated hours or pricing — sent in whenever you need them, no waiting on a big redesign project.' },
+  { title: 'Uptime monitoring', description: "If your site ever goes down, I know before your customers do, and I fix it." },
+];
+---
+
+<Layout title="Monthly Care Plan | Orange County Webworks" description="Optional monthly hosting, small content updates, and uptime monitoring for Orange County, NY business websites.">
+  <Navigation />
+  <main id="main-content" class="pb-20 md:pb-0">
+    <PageHero
+      eyebrow="Care Plan"
+      title="Keep Your Site Live and Up to Date, Without Lifting a Finger"
+      subtitle="A website is only useful if it stays online and current. The care plan covers the ongoing stuff so you don't have to think about it."
+    />
+
+    <div class="text-center -mt-4 mb-8">
+      <span class="inline-block rounded-full border border-violet-400/30 bg-slate-900/40 px-4 py-2 text-sm font-bold text-violet-300">
+        Starting at {CARE_PLAN_PRICE}
+      </span>
+    </div>
+
+    <section class="relative py-8">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-8 sm:grid-cols-3 mb-12">
+          {features.map((f) => (
+            <div class="rounded-xl border-2 border-violet-400/30 bg-gradient-to-b from-violet-400/10 to-transparent p-6">
+              <h3 class="text-lg font-bold text-slate-100 mb-2">{f.title}</h3>
+              <p class="text-slate-300 text-sm leading-relaxed">{f.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-slate-300 leading-relaxed">
+          This is completely optional — every site is yours outright once it's paid for, whether or not you sign up for a care plan. Exact monthly price depends on your site's scope (how many pages, how much content, how often you expect to need updates) — call and I'll give you a straight number.
+        </p>
+
+        <div class="mt-12 text-center">
+          <a
+            href={PHONE_HREF}
+            class="inline-block px-8 py-3 rounded-lg font-semibold bg-violet-500/10 border border-violet-400/50 text-violet-300 hover:bg-violet-500/20 hover:border-violet-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
+          >
+            Call {PHONE_DISPLAY}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <MobileCallBar />
+</Layout>

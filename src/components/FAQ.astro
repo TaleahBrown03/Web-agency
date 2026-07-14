@@ -1,5 +1,7 @@
 ---
 // FAQ.astro - Answers common objections before someone has to call to ask
+import { CARE_PLAN_PRICE } from '../data/pricing';
+
 const faqs = [
   {
     question: "How long does it take to build my site?",
@@ -24,7 +26,7 @@ const faqs = [
   {
     question: "What's included in the monthly care plan?",
     answer:
-      "Ongoing hosting, small content updates, and uptime monitoring — starting at $50-$100/month depending on your site's scope. It's optional, not required.",
+      `Ongoing hosting, small content updates, and uptime monitoring — starting at ${CARE_PLAN_PRICE} depending on your site's scope. It's optional, not required.`,
   },
   {
     question: "I don't know exactly what I want yet — can you still help?",

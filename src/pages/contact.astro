@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import MobileCallBar from '../components/MobileCallBar.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<Layout title="Contact | Orange County Webworks" description="Get in touch with Orange County Webworks — call, send your project details, or book a free discovery call directly.">
+  <Navigation />
+  <main id="main-content" class="pb-20 md:pb-0">
+    <ContactForm />
+  </main>
+  <Footer />
+  <MobileCallBar />
+</Layout>

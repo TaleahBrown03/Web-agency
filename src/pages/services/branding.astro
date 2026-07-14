@@ -1,0 +1,66 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCallBar from '../../components/MobileCallBar.astro';
+import PageHero from '../../components/PageHero.astro';
+import { PHONE_DISPLAY, PHONE_HREF } from '../../data/pricing';
+
+const elements = [
+  'A color palette and typography system that fits your business, not a default theme',
+  'Consistent layout language across every page, so your site feels like one business, not a stack of stock sections',
+  'Voice and tone guidance baked into the copy, so your site sounds like you, not generic marketing filler',
+  'Favicon, social share previews (Open Graph images), and other small details that make your brand look finished everywhere it appears online',
+];
+---
+
+<Layout title="Brand-Aligned Design | Orange County Webworks" description="Cohesive visual identity and design-system work built into every custom website for Orange County, NY businesses.">
+  <Navigation />
+  <main id="main-content" class="pb-20 md:pb-0">
+    <PageHero
+      eyebrow="Brand-Aligned Design"
+      title="A Site That Actually Looks Like Your Business"
+      subtitle="This isn't standalone logo design or a print-collateral package — it's making sure everything about your site (color, type, layout, voice) works together as one consistent identity."
+    />
+
+    <div class="text-center -mt-4 mb-8">
+      <span class="inline-block rounded-full border border-violet-400/30 bg-slate-900/40 px-4 py-2 text-sm font-bold text-violet-300">
+        Included in every package
+      </span>
+    </div>
+
+    <section class="relative py-8">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <p class="text-slate-300 leading-relaxed mb-8">
+          If you already have a logo and brand colors, I build your site around them. If you don't have a formal brand yet, we'll define a simple, consistent visual direction together as part of the build — colors, fonts, and layout style that fit your business and your customers. What's included:
+        </p>
+
+        <ul class="space-y-4 mb-12">
+          {elements.map((el) => (
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-violet-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-slate-300">{el}</span>
+            </li>
+          ))}
+        </ul>
+
+        <p class="text-slate-300 leading-relaxed">
+          Worth being upfront: this is a design system built into your website, not standalone logo design, print collateral, or brand-strategy consulting as a separate service. If you need a logo designed from scratch, mention it during your consultation and we'll figure out the right path.
+        </p>
+
+        <div class="mt-12 text-center">
+          <a
+            href={PHONE_HREF}
+            class="inline-block px-8 py-3 rounded-lg font-semibold bg-violet-500/10 border border-violet-400/50 text-violet-300 hover:bg-violet-500/20 hover:border-violet-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
+          >
+            Call {PHONE_DISPLAY}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <MobileCallBar />
+</Layout>

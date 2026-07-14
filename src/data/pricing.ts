@@ -3,6 +3,7 @@
 
 export const PHONE_DISPLAY = "(845) 445-9268";
 export const PHONE_HREF = "tel:+18454459268";
+export const CARE_PLAN_PRICE = "$50–$100/mo";
 
 export interface PricingTier {
   id: "starter" | "growth" | "automated";

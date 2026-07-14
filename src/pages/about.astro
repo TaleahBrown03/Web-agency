@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import MobileCallBar from '../components/MobileCallBar.astro';
+import About from '../components/About.astro';
+import { PHONE_DISPLAY, PHONE_HREF } from '../data/pricing';
+
+const process = [
+  { step: '1. Talk through your business', description: "A free call or discovery session to understand what your business does, who your customers are, and what's not working about your current site (or lack of one)." },
+  { step: '2. I design and build', description: "Custom-coded from scratch — no templates. You get a preview before anything goes live, so we can adjust it together." },
+  { step: '3. Launch, then support', description: "Once you're happy with it, it goes live. Every package includes a support window after launch, and an optional monthly care plan if you want ongoing updates handled for you." },
+];
+
+const whyLocal = [
+  'Faster response — you can call and talk to the person actually writing your code, not a account manager relaying messages to an offshore dev team.',
+  "Local context — I already know the towns and industries I'm building for, instead of treating Orange County like any other zip code.",
+  'Direct accountability — one person, one point of contact, from the first call to the site going live.',
+];
+---
+
+<Layout title="About | Orange County Webworks" description="Meet Taleah Brown, founder of Orange County Webworks — a software engineer building custom websites and automation for local Orange County, NY businesses.">
+  <Navigation />
+  <main id="main-content" class="pb-20 md:pb-0">
+    <About />
+
+    <section class="relative py-16 sm:py-24">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl mb-10 text-center">How a Project Actually Works</h2>
+        <div class="grid gap-8 sm:grid-cols-3">
+          {process.map((p) => (
+            <div class="rounded-xl border-2 border-emerald-400/30 bg-gradient-to-b from-emerald-400/10 to-transparent p-6">
+              <h3 class="text-lg font-bold text-slate-100 mb-2">{p.step}</h3>
+              <p class="text-slate-300 text-sm leading-relaxed">{p.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="relative py-16 sm:py-24 border-t border-slate-800/50">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl mb-8 text-center">Why Work With a Local Partner</h2>
+        <ul class="space-y-4">
+          {whyLocal.map((reason) => (
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-emerald-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-slate-300 leading-relaxed">{reason}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-12 text-center">
+          <a
+            href={PHONE_HREF}
+            class="inline-block px-8 py-3 rounded-lg font-semibold bg-emerald-500/10 border border-emerald-400/50 text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+          >
+            Call {PHONE_DISPLAY}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <MobileCallBar />
+</Layout>

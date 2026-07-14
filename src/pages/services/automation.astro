@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import MobileCallBar from '../../components/MobileCallBar.astro';
+import PageHero from '../../components/PageHero.astro';
+import { PRICING_TIERS, PHONE_DISPLAY, PHONE_HREF } from '../../data/pricing';
+
+const tierById = Object.fromEntries(PRICING_TIERS.map((t) => [t.id, t]));
+
+const features = [
+  { title: 'Live calendar booking', description: 'Customers book directly onto your real calendar (via Cal.com), synced so you never get double-booked.' },
+  { title: 'Instant SMS lead alerts', description: "The moment someone submits your contact form, you get a text — no checking email, no missed leads." },
+  { title: 'CRM integration', description: 'Leads and bookings flow into a CRM instead of getting lost in an inbox, so follow-up actually happens.' },
+  { title: 'Payment processing', description: 'Collect deposits or full payment online where it makes sense for your business.' },
+];
+---
+
+<Layout title="Booking & Lead Automation | Orange County Webworks" description="Live booking, instant SMS lead alerts, and CRM integration for Orange County, NY service businesses.">
+  <Navigation />
+  <main id="main-content" class="pb-20 md:pb-0">
+    <PageHero
+      eyebrow="Automation"
+      title="Turn Your Website Into a Lead Machine, Not Just a Brochure"
+      subtitle="A site that just sits there is a missed opportunity. These are the systems included in the Automated package that keep leads and bookings moving without you having to manually chase them."
+    />
+
+    <div class="text-center -mt-4 mb-8">
+      <span class="inline-block rounded-full border border-emerald-400/30 bg-slate-900/40 px-4 py-2 text-sm font-bold text-emerald-300">
+        From {tierById.automated.price}
+      </span>
+    </div>
+
+    <section class="relative py-8">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-8 sm:grid-cols-2">
+          {features.map((f) => (
+            <div class="rounded-xl border-2 border-emerald-400/30 bg-gradient-to-b from-emerald-400/10 to-transparent p-6">
+              <h3 class="text-lg font-bold text-slate-100 mb-2">{f.title}</h3>
+              <p class="text-slate-300 text-sm leading-relaxed">{f.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="mt-10 text-slate-300 leading-relaxed">
+          These features are the backbone of the Automated tier, and individual pieces (like live booking) can also be added to a Growth-tier site depending on what your business needs. Multi-location shops and high call-volume businesses get the most value out of the full automation stack.
+        </p>
+
+        <div class="mt-12 text-center">
+          <a
+            href={PHONE_HREF}
+            class="inline-block px-8 py-3 rounded-lg font-semibold bg-emerald-500/10 border border-emerald-400/50 text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+          >
+            Call {PHONE_DISPLAY}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <MobileCallBar />
+</Layout>
