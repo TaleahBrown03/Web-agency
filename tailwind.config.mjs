@@ -44,6 +44,7 @@ export default {
           900: 'rgb(var(--color-navy-900) / <alpha-value>)',
           950: 'rgb(var(--color-navy-950) / <alpha-value>)',
         },
+        // Dark shades are tinted toward the logo navy (#003567); light shades stay neutral for readable text.
         slate: {
           50: '#f8fafc',
           100: '#f1f5f9',
@@ -52,10 +53,10 @@ export default {
           400: '#94a3b8',
           500: '#64748b',
           600: '#475569',
-          700: '#334155',
-          800: '#1e293b',
-          900: '#0f172a',
-          950: '#020617',
+          700: '#1b3a5a',
+          800: '#0d2742',
+          900: '#06192f',
+          950: '#010d1c',
         },
         zinc: {
           50: '#fafafa',
