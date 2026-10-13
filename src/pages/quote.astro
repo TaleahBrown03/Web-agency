@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import MobileCallBar from '../components/MobileCallBar.astro';
+import QuoteCalculator from '../components/QuoteCalculator.astro';
+---
+
+<Layout title="Quote Calculator | Orange County Webworks" description="Estimate the cost of a website for your Orange County, NY business. Pick a package and add-ons to see an estimated range, then request a written quote.">
+  <Navigation />
+  <main id="main-content" class="pb-20 md:pb-0">
+    <QuoteCalculator />
+  </main>
+  <Footer />
+  <MobileCallBar />
+</Layout>

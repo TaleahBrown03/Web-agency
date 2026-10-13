@@ -5,7 +5,6 @@ import Footer from '../../components/Footer.astro';
 import MobileCallBar from '../../components/MobileCallBar.astro';
 import PageHero from '../../components/PageHero.astro';
 import Services from '../../components/Services.astro';
-import QuoteCalculator from '../../components/QuoteCalculator.astro';
 ---
 
 <Layout title="Web Design | Orange County Webworks" description="Custom-coded Starter, Growth, and Custom website packages for Orange County, NY businesses — no templates, from a single page to a fully custom build.">
@@ -29,7 +28,20 @@ import QuoteCalculator from '../../components/QuoteCalculator.astro';
     </section>
 
     <Services />
-    <QuoteCalculator />
+    <section id="quote-calculator" class="scroll-mt-24 pb-20">
+      <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+        <div class="rounded-2xl border border-mint-400/30 bg-slate-900/60 p-8">
+          <h2 class="text-2xl font-bold text-slate-50 sm:text-3xl">Want a rough number first?</h2>
+          <p class="mt-3 text-slate-300">Pick a package and any add-ons to see an estimated range, then send it to us for a written quote.</p>
+          <a
+            href="/quote"
+            class="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-mint-300 to-teal-500 px-8 py-3.5 font-bold text-slate-950 shadow-lg shadow-teal-500/20 transition hover:shadow-teal-500/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+          >
+            Open the Quote Calculator <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
   <Footer />
   <MobileCallBar />
