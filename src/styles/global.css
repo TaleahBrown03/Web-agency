@@ -60,6 +60,12 @@
     @apply scroll-smooth;
   }
 
+  /* Safety net: decorative glows must never make the page scroll sideways on phones.
+     `clip` (unlike `hidden`) keeps the sticky navigation working. */
+  body {
+    overflow-x: clip;
+  }
+
   /* Focus states for accessibility */
   button,
   a {

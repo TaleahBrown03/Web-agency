@@ -14,7 +14,7 @@ industries:
   - "Cleaning services"
   - "Restaurants"
 seoTitle: "Goshen, NY Website Design & Local SEO | Orange County Webworks"
-seoDescription: "Websites and local SEO for Goshen, NY businesses — built by a developer based in Orange County who understands the county-seat customer base."
+seoDescription: "Websites and local SEO for Goshen, NY businesses — from an Orange County web company that understands the county-seat customer base."
 ---
 
 Because Goshen is smaller than Middletown or Newburgh, ranking well locally is often more achievable — but only if your site is actually built to be found, with proper local business schema and Google Business Profile setup tying back to a Goshen address. A lot of small Goshen businesses are still running on outdated templates or no site at all, which is an opportunity for the ones that get local SEO right first.

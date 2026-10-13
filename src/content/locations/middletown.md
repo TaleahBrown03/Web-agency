@@ -13,7 +13,7 @@ industries:
   - "Retail"
   - "Medical & professional offices"
 seoTitle: "Middletown, NY Web Design & Local SEO | Orange County Webworks"
-seoDescription: "Custom-coded websites and local SEO for Middletown, NY service businesses — built by a local developer who knows the Route 211/Dolson Ave commercial corridor."
+seoDescription: "Custom-coded websites and local SEO for Middletown, NY service businesses — from a local web company that knows the Route 211/Dolson Ave commercial corridor."
 ---
 
 Middletown's commercial density means local competition for search visibility is real — a lot of businesses here are chasing the same customers along the same few corridors. A generic template site doesn't stand out in that environment. What does is a fast, custom-built site with local SEO and schema markup dialed in specifically for "near me" and Middletown-qualified searches, so your business shows up when someone off Route 17 or I-84 is looking for exactly what you offer.

@@ -21,7 +21,7 @@ const legendClass = 'text-lg font-bold text-slate-50';
 const checkboxClass =
   'mt-1 h-5 w-5 flex-shrink-0 rounded border-slate-500 bg-slate-900 accent-mint-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950';
 const optionRowClass =
-  'flex cursor-pointer items-start gap-3 rounded-xl border border-slate-700 bg-slate-900/60 p-4 transition hover:border-slate-500 has-[:checked]:border-mint-400/70 has-[:checked]:bg-mint-500/10 has-[:disabled]:cursor-default';
+  'flex flex-wrap cursor-pointer items-start gap-x-3 gap-y-1 rounded-xl sm:flex-nowrap border border-slate-700 bg-slate-900/60 p-4 transition hover:border-slate-500 has-[:checked]:border-mint-400/70 has-[:checked]:bg-mint-500/10 has-[:disabled]:cursor-default';
 const stepperButtonClass =
   'flex h-11 w-11 items-center justify-center rounded-lg border border-slate-600 bg-slate-900 text-xl font-bold text-slate-100 transition hover:border-mint-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-400 disabled:cursor-not-allowed disabled:opacity-40';
 ---
@@ -156,7 +156,7 @@ const stepperButtonClass =
                 <span class="block font-semibold text-slate-100">{QUOTE_ADDONS.standardBooking.label}</span>
                 <span class="block text-sm text-slate-400">{QUOTE_ADDONS.standardBooking.description}</span>
               </span>
-              <span id="bookingStatus" data-booking-status class="whitespace-nowrap text-sm font-semibold text-mint-300">
+              <span id="bookingStatus" data-booking-status class="w-full pl-8 text-sm font-semibold text-mint-300 sm:w-auto sm:whitespace-nowrap sm:pl-0">
                 {initialTier.includesStandardBooking ? `Included with ${initialTier.name}` : `+${formatUsd(QUOTE_ADDONS.standardBooking.price)}`}
               </span>
             </label>
@@ -170,7 +170,7 @@ const stepperButtonClass =
                   {QUOTE_ADDONS.stockImages.description} {QUOTE_ADDONS.stockImages.note}
                 </span>
               </span>
-              <span class="whitespace-nowrap text-sm font-semibold text-mint-300">+{formatUsd(QUOTE_ADDONS.stockImages.price)}</span>
+              <span class="w-full pl-8 text-sm font-semibold text-mint-300 sm:w-auto sm:whitespace-nowrap sm:pl-0">+{formatUsd(QUOTE_ADDONS.stockImages.price)}</span>
             </label>
 
             <p class="px-1 text-sm text-slate-400">{CLIENT_IMAGES_NOTE}</p>
@@ -186,7 +186,7 @@ const stepperButtonClass =
               <label class={optionRowClass}>
                 <input type="checkbox" name="consultation" value={option.id} class={checkboxClass} />
                 <span class="flex-1 font-semibold text-slate-100">{option.label}</span>
-                <span class="text-sm font-semibold text-navy-300">Custom quote</span>
+                <span class="w-full pl-8 text-sm font-semibold text-navy-300 sm:w-auto sm:whitespace-nowrap sm:pl-0">Custom quote</span>
               </label>
             ))}
           </div>
