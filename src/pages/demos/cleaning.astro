@@ -1,8 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import DemoFrame from '../../components/demos/DemoFrame.astro';
 import CleaningDemo from '../../components/CleaningDemo.astro';
 ---
 
-<Layout title="Residential Cleaning Demo | Orange County Webworks" description="Premium residential and commercial cleaning landing experience for Orange County businesses.">
-  <CleaningDemo />
+<Layout title="Cleaning Demo | Orange County Webworks" description="Demo of a one-page Starter package site for a fictional cleaning company." noindex>
+  <DemoFrame tierId="starter" note="Everything is on one page: business details, services, click-to-call, social links, and a basic contact form. Online booking is available as a Starter add-on.">
+    <CleaningDemo />
+  </DemoFrame>
 </Layout>

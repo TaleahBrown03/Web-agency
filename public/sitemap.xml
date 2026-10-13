@@ -4,16 +4,4 @@
     <loc>https://web-agency.vercel.app/</loc>
     <priority>1.0</priority>
   </url>
-  <url>
-    <loc>https://web-agency.vercel.app/demos/cleaning</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://web-agency.vercel.app/demos/hvac</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://web-agency.vercel.app/demos/tire</loc>
-    <priority>0.5</priority>
-  </url>
 </urlset>

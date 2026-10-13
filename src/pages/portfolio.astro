@@ -5,16 +5,48 @@ import Footer from '../components/Footer.astro';
 import MobileCallBar from '../components/MobileCallBar.astro';
 import PageHero from '../components/PageHero.astro';
 import LiveDemos from '../components/LiveDemos.astro';
+import { TIER_BY_ID } from '../data/pricing';
+
+const growth = TIER_BY_ID.growth;
+const clientUrl = 'https://www.middletownnymobilefingerprinting.com/';
 ---
 
-<Layout title="Portfolio | Orange County Webworks" description="Live, interactive demo builds showing what Orange County Webworks delivers at each package tier — for cleaning, HVAC, and auto/tire businesses.">
+<Layout title="Portfolio | Orange County Webworks" description="A client project plus live, interactive demo builds showing the style of site Orange County Webworks delivers at each package — for cleaning, HVAC, and auto/tire businesses.">
   <Navigation />
   <main id="main-content" class="pb-20 md:pb-0">
     <PageHero
       eyebrow="Portfolio"
       title="See the Work Before You Call"
-      subtitle="These are self-built demo sites — not client work, since Orange County Webworks is just getting started — but they're fully live, fast-loading builds that show exactly what each package tier includes."
+      subtitle="A recent client build, plus demo sites built to show the style of work each package can deliver. The demos are fully live, fast-loading builds you can click through."
     />
+    <section aria-labelledby="client-work-heading" class="mx-auto max-w-5xl px-4 pb-16 sm:px-6 lg:px-8">
+      <div class="rounded-3xl border border-mint-500/30 bg-slate-900/60 p-6 shadow-2xl shadow-black/30 sm:p-10">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="rounded-full border border-mint-500/30 bg-slate-950/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-mint-300">Client Project</span>
+          <span class="text-sm text-slate-400">{growth.name} package, expanded</span>
+        </div>
+        <h2 id="client-work-heading" class="mt-5 text-2xl font-bold text-slate-50 sm:text-3xl">Middletown NY Mobile Fingerprinting</h2>
+        <p class="mt-4 text-lg leading-relaxed text-slate-300">
+          A custom-coded multi-page site for a mobile fingerprinting service that travels to customers across Middletown, Orange County, Sullivan County, and the Hudson Valley. Customers book an appointment and pay online, with the price calculated from the mileage to their location.
+        </p>
+        <ul class="mt-6 grid gap-3 text-slate-300 sm:grid-cols-2">
+          <li class="flex gap-2"><span class="text-mint-400" aria-hidden="true">✓</span>Online appointment booking</li>
+          <li class="flex gap-2"><span class="text-mint-400" aria-hidden="true">✓</span>Payment processing priced by mileage</li>
+          <li class="flex gap-2"><span class="text-mint-400" aria-hidden="true">✓</span>Service pages for employment, immigration, adoption, and group fingerprinting</li>
+          <li class="flex gap-2"><span class="text-mint-400" aria-hidden="true">✓</span>Service-area pages built for local search</li>
+        </ul>
+        <a
+          href={clientUrl}
+          target="_blank"
+          rel="noopener"
+          class="mt-8 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-mint-500 to-teal-500 px-6 py-3 font-bold text-slate-950 shadow-lg shadow-mint-500/30 transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-mint-400 focus:ring-offset-2 focus:ring-offset-slate-950"
+        >
+          Visit the live site
+          <span class="sr-only">(opens in a new tab)</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
     <LiveDemos />
   </main>
   <Footer />

@@ -1,0 +1,65 @@
+---
+// HvacSite.astro - Shared shell for the Growth package demo: a five-page HVAC site.
+import Layout from '../../layouts/Layout.astro';
+import DemoFrame from './DemoFrame.astro';
+import { DEMO_PHONE_DISPLAY, DEMO_PHONE_HREF } from '../../data/demos';
+
+interface Props {
+  title: string;
+  current: 'home' | 'services' | 'area' | 'book' | 'contact';
+}
+
+const { title, current } = Astro.props;
+const pages = [
+  { id: 'home', label: 'Home', href: '/demos/hvac' },
+  { id: 'services', label: 'Services', href: '/demos/hvac/services' },
+  { id: 'area', label: 'Newburgh, NY', href: '/demos/hvac/newburgh' },
+  { id: 'book', label: 'Book Online', href: '/demos/hvac/book' },
+  { id: 'contact', label: 'Contact', href: '/demos/hvac/contact' },
+] as const;
+---
+
+<Layout title={`${title} | HVAC Demo | Orange County Webworks`} description="Demo of a five-page Growth package site for a fictional HVAC company." noindex>
+  <DemoFrame tierId="growth" note="This demo is five separate pages: Home, Services, a Newburgh service-area page for local search, Book Online (a standard third-party booking tool), and Contact.">
+    <div class="min-h-screen bg-slate-50 text-slate-900">
+      <header class="border-b border-slate-200 bg-white">
+        <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4 lg:px-8">
+          <a href="/demos/hvac" class="text-lg font-black tracking-[0.15em] text-slate-900">EXAMPLE HEATING &amp; AIR</a>
+          <div class="flex gap-2">
+            <a href={DEMO_PHONE_HREF} class="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-800 hover:border-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-600">Call {DEMO_PHONE_DISPLAY}</a>
+            <a href="/demos/hvac/book" class="rounded-full bg-orange-600 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2">Book Online</a>
+          </div>
+        </div>
+        <nav aria-label="Demo site pages" class="border-t border-slate-100">
+          <ul class="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 lg:px-6">
+            {pages.map((page) => (
+              <li>
+                <a
+                  href={page.href}
+                  aria-current={page.id === current ? 'page' : undefined}
+                  class:list={[
+                    'block whitespace-nowrap border-b-2 px-3 py-3 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-600',
+                    page.id === current ? 'border-sky-700 text-sky-800' : 'border-transparent text-slate-600 hover:text-slate-900',
+                  ]}
+                >
+                  {page.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </header>
+
+      <main class="mx-auto max-w-6xl px-6 py-14 lg:px-8 lg:py-20">
+        <slot />
+      </main>
+
+      <footer class="border-t border-slate-200 bg-white">
+        <div class="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-8 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+          <p>Example Heating &amp; Air · Heating and cooling service in Newburgh, NY</p>
+          <a href={DEMO_PHONE_HREF} class="font-semibold text-sky-800 hover:underline">{DEMO_PHONE_DISPLAY}</a>
+        </div>
+      </footer>
+    </div>
+  </DemoFrame>
+</Layout>

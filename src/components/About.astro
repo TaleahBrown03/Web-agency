@@ -1,31 +1,42 @@
 ---
-// About.astro - Founder introduction
+// About.astro - Company overview: who we help, what we build, and how working together goes
+const industries = ['HVAC & contractors', 'Landscapers & handymen', 'Barbers & solo operators', 'Restaurants & bars', 'Auto services', 'Retail & clinics'];
+const offerings = ['Custom-coded websites', 'Local SEO setup', 'Online booking', 'E-commerce', 'Brand-aligned design', 'Monthly care plans'];
 ---
 
 <section id="about" class="relative py-24 sm:py-32">
   <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-    <div class="grid gap-10 lg:grid-cols-[0.4fr_0.6fr] lg:items-center">
-      <div class="flex flex-col items-center text-center lg:items-start lg:text-left">
-        <div class="flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 via-emerald-500 to-violet-600 text-3xl font-bold text-white shadow-lg shadow-emerald-500/20">
-          TB
-        </div>
-        <p class="mt-5 text-lg font-bold text-slate-50">Taleah Brown</p>
-        <p class="text-sm text-slate-400">Founder, Orange County Webworks</p>
-        <ul class="mt-4 space-y-1.5 text-sm text-slate-400">
-          <li>5+ years of software engineering experience</li>
-          <li>Based in Orange County, NY</li>
-          <li>Every site is custom-coded, not a template</li>
-        </ul>
-      </div>
-
+    <div class="grid gap-10 lg:grid-cols-[0.55fr_0.45fr] lg:items-start">
       <div>
-        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-400">Why I started this</p>
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-mint-400">About Orange County Webworks</p>
         <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl">
-          Hi, I'm Taleah.
+          Websites for local businesses in Orange County, NY
         </h2>
         <p class="mt-5 text-lg leading-8 text-slate-300">
-          I started Orange County Webworks because I kept running into small business owners around Orange County who either didn't have a website at all, or had one that wasn't showing up when people searched for them. I've spent the last 5 years working as a software engineer, and I wanted to put that experience to work for local businesses directly — building sites that are fast, custom-coded, and actually set up to get found on Google, instead of a generic template.
+          Orange County Webworks builds fast, custom-coded websites for small businesses across Middletown, Newburgh, Warwick, and the rest of Orange County. Every site is built around the business it's for, with no templates, and set up to be found in local search.
         </p>
+        <p class="mt-4 text-lg leading-8 text-slate-300">
+          You talk directly with the developer building your site, see published price ranges before you reach out, and review everything before it goes live.
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        <div class="rounded-xl border border-slate-700/60 bg-slate-900/50 p-6">
+          <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-300">Who we work with</h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {industries.map((item) => (
+              <li class="rounded-full border border-slate-700 bg-slate-950/60 px-3 py-1.5 text-sm text-slate-200">{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-slate-700/60 bg-slate-900/50 p-6">
+          <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-300">What we build</h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {offerings.map((item) => (
+              <li class="rounded-full border border-mint-400/30 bg-mint-500/10 px-3 py-1.5 text-sm text-mint-100">{item}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   </div>

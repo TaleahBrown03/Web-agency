@@ -4,6 +4,46 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Brand palette from the logo; values live in src/styles/global.css.
+        teal: {
+          50: 'rgb(var(--color-teal-50) / <alpha-value>)',
+          100: 'rgb(var(--color-teal-100) / <alpha-value>)',
+          200: 'rgb(var(--color-teal-200) / <alpha-value>)',
+          300: 'rgb(var(--color-teal-300) / <alpha-value>)',
+          400: 'rgb(var(--color-teal-400) / <alpha-value>)',
+          500: 'rgb(var(--color-teal-500) / <alpha-value>)',
+          600: 'rgb(var(--color-teal-600) / <alpha-value>)',
+          700: 'rgb(var(--color-teal-700) / <alpha-value>)',
+          800: 'rgb(var(--color-teal-800) / <alpha-value>)',
+          900: 'rgb(var(--color-teal-900) / <alpha-value>)',
+          950: 'rgb(var(--color-teal-950) / <alpha-value>)',
+        },
+        mint: {
+          50: 'rgb(var(--color-mint-50) / <alpha-value>)',
+          100: 'rgb(var(--color-mint-100) / <alpha-value>)',
+          200: 'rgb(var(--color-mint-200) / <alpha-value>)',
+          300: 'rgb(var(--color-mint-300) / <alpha-value>)',
+          400: 'rgb(var(--color-mint-400) / <alpha-value>)',
+          500: 'rgb(var(--color-mint-500) / <alpha-value>)',
+          600: 'rgb(var(--color-mint-600) / <alpha-value>)',
+          700: 'rgb(var(--color-mint-700) / <alpha-value>)',
+          800: 'rgb(var(--color-mint-800) / <alpha-value>)',
+          900: 'rgb(var(--color-mint-900) / <alpha-value>)',
+          950: 'rgb(var(--color-mint-950) / <alpha-value>)',
+        },
+        navy: {
+          50: 'rgb(var(--color-navy-50) / <alpha-value>)',
+          100: 'rgb(var(--color-navy-100) / <alpha-value>)',
+          200: 'rgb(var(--color-navy-200) / <alpha-value>)',
+          300: 'rgb(var(--color-navy-300) / <alpha-value>)',
+          400: 'rgb(var(--color-navy-400) / <alpha-value>)',
+          500: 'rgb(var(--color-navy-500) / <alpha-value>)',
+          600: 'rgb(var(--color-navy-600) / <alpha-value>)',
+          700: 'rgb(var(--color-navy-700) / <alpha-value>)',
+          800: 'rgb(var(--color-navy-800) / <alpha-value>)',
+          900: 'rgb(var(--color-navy-900) / <alpha-value>)',
+          950: 'rgb(var(--color-navy-950) / <alpha-value>)',
+        },
         slate: {
           50: '#f8fafc',
           100: '#f1f5f9',

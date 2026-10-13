@@ -4,16 +4,14 @@ import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
 import MobileCallBar from '../../components/MobileCallBar.astro';
 import PageHero from '../../components/PageHero.astro';
-import { PRICING_TIERS, PHONE_DISPLAY, PHONE_HREF } from '../../data/pricing';
-
-const tierById = Object.fromEntries(PRICING_TIERS.map((t) => [t.id, t]));
+import { TIER_BY_ID, PHONE_DISPLAY, PHONE_HREF, ECOMMERCE_PRICE_NOTE } from '../../data/pricing';
 
 const features = [
   'Product catalog pages built to match your actual inventory, not a generic storefront template',
   'Secure checkout and payment processing (e.g. Stripe) built directly into your site',
   'Mobile-first cart and checkout flow — most local shoppers are buying from their phone',
   'Order confirmation emails and basic order tracking',
-  'Integrates with the same booking/lead automation as the Automated package, if you also take service appointments',
+  'Integrates with the same booking/lead automation as Custom projects, if you also take service appointments',
 ];
 ---
 
@@ -27,21 +25,21 @@ const features = [
     />
 
     <div class="text-center -mt-4 mb-8">
-      <span class="inline-block rounded-full border border-emerald-400/30 bg-slate-900/40 px-4 py-2 text-sm font-bold text-emerald-300">
-        From {tierById.growth.price} (Growth tier and up)
+      <span class="inline-block rounded-full border border-mint-400/30 bg-slate-900/40 px-4 py-2 text-sm font-bold text-mint-300">
+        {ECOMMERCE_PRICE_NOTE}
       </span>
     </div>
 
     <section class="relative py-8">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <p class="text-slate-300 leading-relaxed mb-8">
-          E-commerce is a real, deliverable part of what I build — not a future roadmap item. If your Orange County business sells products online, in addition to (or instead of) booking service appointments, here's what's included:
+          E-commerce is a real, deliverable part of what we build — not a future roadmap item. If your Orange County business sells products online, in addition to (or instead of) booking service appointments, here's what's included:
         </p>
 
         <ul class="space-y-4 mb-12">
           {features.map((feature) => (
             <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-emerald-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-mint-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
               </svg>
               <span class="text-slate-300">{feature}</span>
@@ -50,13 +48,13 @@ const features = [
         </ul>
 
         <p class="text-slate-300 leading-relaxed">
-          E-commerce builds are scoped individually since product count, payment needs, and shipping/pickup logistics vary a lot from business to business — they typically fall under the Growth or Automated tier depending on complexity. Call and I'll give you a straight answer on scope and price.
+          E-commerce builds start at {TIER_BY_ID.growth.startsAt}, and the final price is set after a consultation, since product count, payment needs, and shipping/pickup logistics vary a lot from business to business. Call and we'll give you a straight answer on scope and price. The <a href="/services/web-design#quote-calculator" class="font-semibold text-mint-300 hover:underline">quote calculator</a> will flag e-commerce as a custom quote rather than show a fixed total.
         </p>
 
         <div class="mt-12 text-center">
           <a
             href={PHONE_HREF}
-            class="inline-block px-8 py-3 rounded-lg font-semibold bg-emerald-500/10 border border-emerald-400/50 text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+            class="inline-block px-8 py-3 rounded-lg font-semibold bg-mint-500/10 border border-mint-400/50 text-mint-300 hover:bg-mint-500/20 hover:border-mint-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-mint-400"
           >
             Call {PHONE_DISPLAY} to Scope Your Store
           </a>

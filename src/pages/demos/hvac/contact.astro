@@ -1,0 +1,34 @@
+---
+import HvacSite from '../../../components/demos/HvacSite.astro';
+import { DEMO_PHONE_DISPLAY, DEMO_PHONE_HREF } from '../../../data/demos';
+
+const field =
+  'mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 focus:border-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-600/30';
+---
+
+<HvacSite title="Contact" current="contact">
+  <div class="grid gap-10 lg:grid-cols-2">
+    <div>
+      <h1 class="text-4xl font-black tracking-tight">Contact us</h1>
+      <p class="mt-4 text-lg text-slate-600">Questions or a project that needs an estimate? Send a message or call.</p>
+      <a href={DEMO_PHONE_HREF} class="mt-6 inline-flex rounded-full bg-sky-800 px-6 py-3 font-semibold text-white hover:bg-sky-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 focus-visible:ring-offset-2">Call {DEMO_PHONE_DISPLAY}</a>
+    </div>
+    <form data-demo-form="Demo only: in a real site, this message would go straight to the business's email." class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+      <div class="space-y-4">
+        <label class="block text-sm font-semibold text-slate-700">Name<input required name="name" autocomplete="off" class={field} /></label>
+        <label class="block text-sm font-semibold text-slate-700">Phone<input required type="tel" name="phone" autocomplete="off" class={field} /></label>
+        <label class="block text-sm font-semibold text-slate-700">Service needed
+          <select name="service" class={field}>
+            <option>Heating repair</option>
+            <option>AC repair or installation</option>
+            <option>Seasonal maintenance</option>
+            <option>Something else</option>
+          </select>
+        </label>
+        <label class="block text-sm font-semibold text-slate-700">Message<textarea name="message" rows="3" class={field}></textarea></label>
+        <button type="submit" class="w-full rounded-full bg-orange-600 px-6 py-3 font-semibold text-white hover:bg-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2">Send Message</button>
+        <p data-demo-status role="status" class="text-sm font-semibold text-sky-900"></p>
+      </div>
+    </form>
+  </div>
+</HvacSite>

@@ -1,0 +1,367 @@
+---
+// QuoteCalculator.astro - Interactive estimate for the website packages.
+// Prices, inclusions, and add-ons come from data/pricing.ts; the math lives in lib/quote.ts.
+import {
+  PRICING_TIERS,
+  QUOTE_ADDONS,
+  CONSULTATION_OPTIONS,
+  CLIENT_IMAGES_NOTE,
+  QUOTE_DISCLAIMER,
+  QUOTE_EXCLUSIONS,
+  TIER_BY_ID,
+  formatUsd,
+} from '../data/pricing';
+import { DEFAULT_SELECTION, computeQuote, selectionToParams } from '../lib/quote';
+
+const initial = computeQuote(DEFAULT_SELECTION);
+const initialTier = TIER_BY_ID[DEFAULT_SELECTION.tierId];
+const initialHref = `/contact?${selectionToParams(DEFAULT_SELECTION)}#contact`;
+
+const legendClass = 'text-lg font-bold text-slate-50';
+const checkboxClass =
+  'mt-1 h-5 w-5 flex-shrink-0 rounded border-slate-500 bg-slate-900 accent-mint-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950';
+const optionRowClass =
+  'flex cursor-pointer items-start gap-3 rounded-xl border border-slate-700 bg-slate-900/60 p-4 transition hover:border-slate-500 has-[:checked]:border-mint-400/70 has-[:checked]:bg-mint-500/10 has-[:disabled]:cursor-default';
+const stepperButtonClass =
+  'flex h-11 w-11 items-center justify-center rounded-lg border border-slate-600 bg-slate-900 text-xl font-bold text-slate-100 transition hover:border-mint-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-400 disabled:cursor-not-allowed disabled:opacity-40';
+---
+
+<section id="quote-calculator" class="relative scroll-mt-24 py-20 sm:py-24" aria-labelledby="quote-heading">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="mb-10 max-w-3xl">
+      <div class="inline-block rounded-full border border-mint-500/30 bg-slate-900/40 px-4 py-2">
+        <span class="text-sm font-semibold text-mint-300">Quote Calculator</span>
+      </div>
+      <h2 id="quote-heading" class="mt-5 text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl">Estimate Your Website</h2>
+      <p class="mt-4 text-lg leading-relaxed text-slate-300">
+        Pick a package and any add-ons to see an estimated range. When it looks right, send it to us and we'll follow up with a written quote.
+      </p>
+    </div>
+
+    <noscript>
+      <p class="mb-8 rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-slate-200">
+        The calculator needs JavaScript to update. You can still <a href="/contact#contact" class="font-semibold text-mint-300 underline">send us your project details</a> and we'll put together a quote.
+      </p>
+    </noscript>
+
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start">
+      <form id="quoteCalc" class="space-y-10" novalidate>
+        <!-- Step 1: Package -->
+        <fieldset>
+          <legend class={legendClass}>1. Choose a package</legend>
+          <div class="mt-4 grid gap-3 sm:grid-cols-3">
+            {PRICING_TIERS.map((tier) => (
+              <label class="relative flex cursor-pointer flex-col gap-1 rounded-xl border-2 border-slate-700 bg-slate-900/60 p-4 transition hover:border-slate-500 has-[:checked]:border-mint-400 has-[:checked]:bg-mint-500/10 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-mint-400 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-slate-950">
+                <span class="flex items-center gap-3">
+                  <input
+                    type="radio"
+                    name="tier"
+                    value={tier.id}
+                    checked={tier.id === DEFAULT_SELECTION.tierId}
+                    class="h-5 w-5 flex-shrink-0 accent-mint-400 focus:outline-none"
+                  />
+                  <span class="text-base font-bold text-slate-50">{tier.name}</span>
+                  {tier.highlight && (
+                    <span class="ml-auto rounded-full border border-mint-400/50 bg-mint-400/15 px-2 py-0.5 text-xs font-bold text-mint-300">Recommended</span>
+                  )}
+                </span>
+                <span class="pl-8 text-sm font-semibold text-slate-200">
+                  {tier.priceMax === null ? `From ${tier.startsAt}` : tier.price}
+                </span>
+                <span class="pl-8 text-xs text-slate-400">{tier.sizeLabel}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <!-- Step 2: What's included -->
+        <div>
+          <h3 class={legendClass}>2. What's included</h3>
+          {PRICING_TIERS.map((tier) => (
+            <div data-tier-panel={tier.id} hidden={tier.id !== DEFAULT_SELECTION.tierId} class="mt-4 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+              <p class="text-sm leading-relaxed text-slate-300">{tier.description}</p>
+              {tier.featuresIntro && <p class="mt-4 text-sm font-semibold text-slate-200">{tier.featuresIntro}</p>}
+              <ul class="mt-4 grid gap-2 sm:grid-cols-2">
+                {tier.features.map((feature) => (
+                  <li class="flex items-start gap-2 text-sm text-slate-200">
+                    <svg class="mt-0.5 h-4 w-4 flex-shrink-0 text-mint-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              {tier.clientNote && <p class="mt-4 text-sm text-slate-400">{tier.clientNote}</p>}
+              {tier.priceMax === null && (
+                <p class="mt-4 text-sm text-slate-300">
+                  Scope and final price are set after a free consultation. Custom booking workflows, CRM-connected booking, e-commerce, and other advanced requirements are quoted individually.
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <!-- Step 3: Fixed-price add-ons (Starter and Growth only) -->
+        <fieldset>
+          <legend class={legendClass}>3. Add-ons</legend>
+
+          <p data-custom-addons-note hidden={initialTier.priceMax !== null} class="mt-4 rounded-xl border border-navy-400/40 bg-navy-500/10 p-4 text-sm text-slate-200">
+            Custom projects are scoped after a consultation, so extra pages, booking, and images are priced as part of your custom quote.
+          </p>
+
+          <div data-fixed-addons hidden={initialTier.priceMax === null} class="mt-4 space-y-3">
+            <!-- Extra pages -->
+            <div class="rounded-xl border border-slate-700 bg-slate-900/60 p-4">
+              <label for="extraPages" class="block font-semibold text-slate-100">
+                {QUOTE_ADDONS.extraPage.label}
+                <span class="font-normal text-slate-300"> · {formatUsd(QUOTE_ADDONS.extraPage.price)} each</span>
+              </label>
+              <p id="extraPagesHint" class="mt-1 text-sm text-slate-400">
+                Your package includes <span data-included-pages>{initialTier.includedPages} page{initialTier.includedPages === 1 ? '' : 's'}</span>. Up to {QUOTE_ADDONS.extraPage.maxQuantity} extra pages here; need more and it becomes a custom quote.
+              </p>
+              <div class="mt-3 flex items-center gap-2">
+                <button type="button" data-step="-1" aria-controls="extraPages" aria-label="Remove one extra page" class={stepperButtonClass}>−</button>
+                <input
+                  id="extraPages"
+                  name="extraPages"
+                  type="number"
+                  inputmode="numeric"
+                  min="0"
+                  max={QUOTE_ADDONS.extraPage.maxQuantity}
+                  step="1"
+                  value="0"
+                  aria-describedby="extraPagesHint"
+                  class="h-11 w-20 rounded-lg border border-slate-600 bg-slate-900 px-3 text-center text-lg font-semibold text-slate-50 focus:border-mint-400 focus:outline-none focus:ring-2 focus:ring-mint-400/40"
+                />
+                <button type="button" data-step="1" aria-controls="extraPages" aria-label="Add one extra page" class={stepperButtonClass}>+</button>
+              </div>
+              <label class="mt-3 flex cursor-pointer items-center gap-3 text-sm font-semibold text-slate-100">
+                <input type="checkbox" name="morePages" class={checkboxClass.replace('mt-1 ', '')} />
+                {QUOTE_ADDONS.extraPage.moreLabel}
+                <span class="ml-auto whitespace-nowrap text-navy-300">Custom quote</span>
+              </label>
+            </div>
+
+            <!-- Standard booking -->
+            <label class={optionRowClass}>
+              <input
+                type="checkbox"
+                name="standardBooking"
+                checked={initialTier.includesStandardBooking}
+                disabled={initialTier.includesStandardBooking}
+                aria-describedby="bookingStatus"
+                class={checkboxClass}
+              />
+              <span class="flex-1">
+                <span class="block font-semibold text-slate-100">{QUOTE_ADDONS.standardBooking.label}</span>
+                <span class="block text-sm text-slate-400">{QUOTE_ADDONS.standardBooking.description}</span>
+              </span>
+              <span id="bookingStatus" data-booking-status class="whitespace-nowrap text-sm font-semibold text-mint-300">
+                {initialTier.includesStandardBooking ? `Included with ${initialTier.name}` : `+${formatUsd(QUOTE_ADDONS.standardBooking.price)}`}
+              </span>
+            </label>
+
+            <!-- Stock images -->
+            <label class={optionRowClass}>
+              <input type="checkbox" name="stockImages" aria-describedby="stockImagesNote" class={checkboxClass} />
+              <span class="flex-1">
+                <span class="block font-semibold text-slate-100">{QUOTE_ADDONS.stockImages.label}</span>
+                <span id="stockImagesNote" class="block text-sm text-slate-400">
+                  {QUOTE_ADDONS.stockImages.description} {QUOTE_ADDONS.stockImages.note}
+                </span>
+              </span>
+              <span class="whitespace-nowrap text-sm font-semibold text-mint-300">+{formatUsd(QUOTE_ADDONS.stockImages.price)}</span>
+            </label>
+
+            <p class="px-1 text-sm text-slate-400">{CLIENT_IMAGES_NOTE}</p>
+          </div>
+        </fieldset>
+
+        <!-- Step 4: Needs a consultation -->
+        <fieldset aria-describedby="consultHint">
+          <legend class={legendClass}>4. Anything more advanced?</legend>
+          <p id="consultHint" class="mt-1 text-sm text-slate-400">These are priced after a consultation. Selecting any of them switches your estimate to a custom quote.</p>
+          <div class="mt-4 space-y-3">
+            {CONSULTATION_OPTIONS.map((option) => (
+              <label class={optionRowClass}>
+                <input type="checkbox" name="consultation" value={option.id} class={checkboxClass} />
+                <span class="flex-1 font-semibold text-slate-100">{option.label}</span>
+                <span class="text-sm font-semibold text-navy-300">Custom quote</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      </form>
+
+      <!-- Summary -->
+      <aside aria-labelledby="quote-summary-heading" class="rounded-2xl border-2 border-mint-400/40 bg-slate-900/80 p-6 shadow-2xl shadow-black/30 lg:sticky lg:top-24">
+        <h3 id="quote-summary-heading" class="text-xl font-bold text-slate-50">Your estimate</h3>
+
+        <ul data-quote-lines class="mt-4 divide-y divide-slate-700/70 text-sm">
+          {initial.lines.map((line) => (
+            <li class="flex justify-between gap-4 py-2.5">
+              <span class="text-slate-300">{line.label}</span>
+              <span class="whitespace-nowrap text-right font-semibold text-slate-100">{line.value}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-4 border-t border-slate-600 pt-4">
+          <p data-quote-total-label class="text-sm font-semibold text-slate-300">
+            {initial.needsCustomQuote ? 'Next step' : 'Estimated range'}
+          </p>
+          <p data-quote-total class="mt-1 text-3xl font-bold text-mint-300">{initial.totalLabel}</p>
+        </div>
+
+        <p class="mt-5 rounded-lg border border-amber-300/50 bg-amber-300/10 p-3 text-sm font-semibold leading-relaxed text-amber-100">
+          {QUOTE_DISCLAIMER}
+        </p>
+        <p class="mt-3 text-xs leading-relaxed text-slate-400">{QUOTE_EXCLUSIONS}</p>
+
+        <a
+          data-quote-cta
+          href={initialHref}
+          class="mt-6 block w-full rounded-lg bg-gradient-to-r from-mint-400 to-teal-400 px-6 py-3.5 text-center text-base font-bold text-slate-950 shadow-lg shadow-mint-500/30 transition hover:shadow-mint-500/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+        >
+          Request my final quote
+        </a>
+
+        <p data-quote-live class="sr-only" aria-live="polite" aria-atomic="true"></p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { QUOTE_ADDONS, TIER_BY_ID, formatUsd } from '../data/pricing';
+  import { clampExtraPages, computeQuote, isTierId, selectionToParams, type ConsultationId, type QuoteSelection } from '../lib/quote';
+
+  function initQuoteCalculator() {
+    const form = document.getElementById('quoteCalc');
+    const pagesInput = document.getElementById('extraPages');
+    if (!(form instanceof HTMLFormElement) || !(pagesInput instanceof HTMLInputElement)) return;
+    if (form.dataset.ready) return;
+    form.dataset.ready = 'true';
+
+    const root = form.closest('section')!;
+    const q = <T extends Element>(selector: string) => root.querySelector<T>(selector);
+    const bookingInput = form.querySelector<HTMLInputElement>('input[name="standardBooking"]')!;
+    const stockInput = form.querySelector<HTMLInputElement>('input[name="stockImages"]')!;
+    const morePagesInput = form.querySelector<HTMLInputElement>('input[name="morePages"]')!;
+    const stepButtons = form.querySelectorAll<HTMLButtonElement>('[data-step]');
+    let starterBookingChoice = bookingInput.checked && !bookingInput.disabled;
+    let liveTimer: number | undefined;
+
+    function readTierId() {
+      const tierValue = new FormData(form as HTMLFormElement).get('tier');
+      return isTierId(tierValue) ? tierValue : 'growth';
+    }
+
+    // Growth includes standard booking: show it as checked and locked, never charged.
+    // Starter keeps the visitor's own choice, even after switching packages back and forth.
+    function syncBookingInput(tierId: QuoteSelection['tierId']) {
+      const tier = TIER_BY_ID[tierId];
+      bookingInput.disabled = tier.includesStandardBooking;
+      bookingInput.checked = tier.includesStandardBooking || starterBookingChoice;
+      q<HTMLElement>('[data-booking-status]')!.textContent = tier.includesStandardBooking
+        ? `Included with ${tier.name}`
+        : `+${formatUsd(QUOTE_ADDONS.standardBooking.price)}`;
+    }
+
+    function readSelection(): QuoteSelection {
+      const tierId = readTierId();
+      const consultation = Array.from(form!.querySelectorAll<HTMLInputElement>('input[name="consultation"]:checked')).map(
+        (input) => input.value as ConsultationId,
+      );
+      return {
+        tierId,
+        extraPages: clampExtraPages(pagesInput!.value),
+        morePages: morePagesInput.checked,
+        standardBooking: !TIER_BY_ID[tierId].includesStandardBooking && starterBookingChoice,
+        stockImages: stockInput.checked,
+        consultation,
+      };
+    }
+
+    function render(announce: boolean) {
+      syncBookingInput(readTierId());
+      const selection = readSelection();
+      const tier = TIER_BY_ID[selection.tierId];
+      const result = computeQuote(selection);
+
+      root.querySelectorAll<HTMLElement>('[data-tier-panel]').forEach((panel) => {
+        panel.hidden = panel.dataset.tierPanel !== tier.id;
+      });
+
+      const isCustom = tier.priceMax === null;
+      q<HTMLElement>('[data-fixed-addons]')!.hidden = isCustom;
+      q<HTMLElement>('[data-custom-addons-note]')!.hidden = !isCustom;
+
+      if (tier.includedPages !== null) {
+        q<HTMLElement>('[data-included-pages]')!.textContent = `${tier.includedPages} page${tier.includedPages === 1 ? '' : 's'}`;
+      }
+
+      stepButtons.forEach((button) => {
+        const step = Number(button.dataset.step);
+        button.disabled = step < 0 ? selection.extraPages <= 0 : selection.extraPages >= QUOTE_ADDONS.extraPage.maxQuantity;
+      });
+
+      const list = q<HTMLUListElement>('[data-quote-lines]')!;
+      list.replaceChildren(
+        ...result.lines.map((line) => {
+          const li = document.createElement('li');
+          li.className = 'flex justify-between gap-4 py-2.5';
+          const label = document.createElement('span');
+          label.className = 'text-slate-300';
+          label.textContent = line.label;
+          const value = document.createElement('span');
+          value.className = 'whitespace-nowrap text-right font-semibold text-slate-100';
+          value.textContent = line.value;
+          li.append(label, value);
+          return li;
+        }),
+      );
+
+      q<HTMLElement>('[data-quote-total-label]')!.textContent = result.needsCustomQuote ? 'Next step' : 'Estimated range';
+      q<HTMLElement>('[data-quote-total]')!.textContent = result.totalLabel;
+      q<HTMLAnchorElement>('[data-quote-cta]')!.href = `/contact?${selectionToParams(selection)}#contact`;
+
+      if (announce) {
+        const live = q<HTMLElement>('[data-quote-live]')!;
+        const message = result.needsCustomQuote
+          ? `${tier.name} package selected. Your selections need a custom quote after a consultation.`
+          : `${tier.name} package. Estimated range ${result.totalLabel}.`;
+        window.clearTimeout(liveTimer);
+        liveTimer = window.setTimeout(() => {
+          live.textContent = message;
+        }, 400);
+      }
+    }
+
+    form.addEventListener('change', (event) => {
+      if (event.target === bookingInput && !bookingInput.disabled) starterBookingChoice = bookingInput.checked;
+      if (event.target === pagesInput) {
+        // Typing more than the limit means the project needs a custom quote.
+        if (Number(pagesInput.value) > QUOTE_ADDONS.extraPage.maxQuantity) morePagesInput.checked = true;
+        pagesInput.value = String(clampExtraPages(pagesInput.value));
+      }
+      render(true);
+    });
+    pagesInput.addEventListener('input', () => render(true));
+    // Enter in the number field shouldn't submit (and reload) the page.
+    form.addEventListener('submit', (event) => event.preventDefault());
+
+    stepButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        pagesInput.value = String(clampExtraPages(clampExtraPages(pagesInput.value) + Number(button.dataset.step)));
+        render(true);
+      });
+    });
+
+    // Restore any browser-remembered form state (e.g. after pressing Back) without announcing it.
+    render(false);
+  }
+
+  document.addEventListener('DOMContentLoaded', initQuoteCalculator);
+  document.addEventListener('astro:after-swap', initQuoteCalculator);
+</script>

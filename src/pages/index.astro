@@ -8,31 +8,40 @@ import Services from '../components/Services.astro';
 import FAQ from '../components/FAQ.astro';
 import Footer from '../components/Footer.astro';
 import MobileCallBar from '../components/MobileCallBar.astro';
+import { PHONE_DISPLAY, PHONE_HREF } from '../data/pricing';
 ---
 
 <Layout title="Orange County Webworks | Custom Websites & Automation for Orange County Businesses">
   <Navigation />
   <main id="main-content" class="pb-20 md:pb-0">
     <Hero />
-    <LiveDemos />
+    <Services />
     <About />
     <div class="-mt-16 mb-16 text-center">
-      <a href="/about" class="inline-block text-sm font-semibold text-emerald-300 hover:underline">Read the full story &amp; how a project works →</a>
+      <a href="/about#how-it-works" class="inline-block text-sm font-semibold text-mint-300 hover:underline">See how a project works →</a>
     </div>
-    <Services />
+    <LiveDemos />
     <FAQ />
     <section class="relative py-16 text-center">
       <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl mb-4">Ready to Get Started?</h2>
         <p class="text-slate-300 mb-8">
-          Send your project details, book a free discovery call, or just call directly — all on the contact page.
+          Send your project details, book a free discovery call, or call — all on the contact page.
         </p>
-        <a
-          href="/contact"
-          class="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-8 py-4 text-lg font-bold text-slate-950 shadow-2xl shadow-emerald-500/30 transition hover:shadow-emerald-500/50 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-slate-950 active:scale-95"
-        >
-          Get In Touch
-        </a>
+        <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-mint-500 to-teal-500 px-8 py-4 text-lg font-bold text-slate-950 shadow-2xl shadow-mint-500/30 transition hover:shadow-mint-500/50 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-mint-400 focus:ring-offset-2 focus:ring-offset-slate-950 active:scale-95"
+          >
+            Book Free Consultation
+          </a>
+          <a
+            href={PHONE_HREF}
+            class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-mint-500/60 bg-slate-900/40 px-8 py-4 text-lg font-bold text-slate-100 transition hover:border-mint-400 hover:bg-slate-800/60 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-mint-400/50 focus:ring-offset-2 focus:ring-offset-slate-950 active:scale-95"
+          >
+            Call {PHONE_DISPLAY}
+          </a>
+        </div>
       </div>
     </section>
   </main>

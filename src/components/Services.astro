@@ -4,35 +4,35 @@ import { PRICING_TIERS, PHONE_DISPLAY, PHONE_HREF, CARE_PLAN_PRICE } from '../da
 
 const colorClasses = {
   cyan: {
-    border: "border-cyan-400/30",
-    hoverBorder: "hover:border-cyan-400/60",
-    accent: "from-cyan-400/20",
-    glow: "shadow-cyan-400/10",
-    text: "text-cyan-400",
-    button: "border-cyan-400/50 bg-cyan-400/10 text-cyan-300 hover:bg-cyan-400/20 hover:border-cyan-400 focus:ring-cyan-400",
+    border: "border-teal-400/30",
+    hoverBorder: "hover:border-teal-400/60",
+    accent: "from-teal-400/20",
+    glow: "shadow-teal-400/10",
+    text: "text-teal-400",
+    button: "border-teal-400/50 bg-teal-400/10 text-teal-300 hover:bg-teal-400/20 hover:border-teal-400 focus:ring-teal-400",
   },
   emerald: {
-    border: "border-emerald-400/30",
-    hoverBorder: "hover:border-emerald-400/60",
-    accent: "from-emerald-400/20",
-    glow: "shadow-emerald-400/10",
-    text: "text-emerald-400",
-    button: "border-emerald-400/50 bg-emerald-400/10 text-emerald-300 hover:bg-emerald-400/20 hover:border-emerald-400 focus:ring-emerald-400",
+    border: "border-mint-400/30",
+    hoverBorder: "hover:border-mint-400/60",
+    accent: "from-mint-400/20",
+    glow: "shadow-mint-400/10",
+    text: "text-mint-400",
+    button: "border-mint-400/50 bg-mint-400/10 text-mint-300 hover:bg-mint-400/20 hover:border-mint-400 focus:ring-mint-400",
   },
   violet: {
-    border: "border-violet-400/30",
-    hoverBorder: "hover:border-violet-400/60",
-    accent: "from-violet-400/20",
-    glow: "shadow-violet-400/10",
-    text: "text-violet-400",
-    button: "border-violet-400/50 bg-violet-400/10 text-violet-300 hover:bg-violet-400/20 hover:border-violet-400 focus:ring-violet-400",
+    border: "border-navy-400/30",
+    hoverBorder: "hover:border-navy-400/60",
+    accent: "from-navy-400/20",
+    glow: "shadow-navy-400/10",
+    text: "text-navy-400",
+    button: "border-navy-400/50 bg-navy-400/10 text-navy-300 hover:bg-navy-400/20 hover:border-navy-400 focus:ring-navy-400",
   },
 } as const;
 ---
 
 <section id="services" class="relative py-24 overflow-hidden">
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-    <div class="absolute top-0 right-0 h-96 w-96 rounded-full bg-emerald-500/5 blur-3xl"></div>
+    <div class="absolute top-0 right-0 h-96 w-96 rounded-full bg-mint-500/5 blur-3xl"></div>
   </div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
@@ -41,36 +41,40 @@ const colorClasses = {
         Packages & Pricing
       </h2>
       <p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-        Custom-built sites, no templates. Pick the package that fits your business, or call and we'll figure out the right fit together.
+        Custom-built sites, no templates, all one-time project fees. Pick the package that fits your business, or call and we'll figure out the right fit together.
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid gap-8 lg:grid-cols-3 lg:items-start">
       {
         PRICING_TIERS.map((tier) => {
           const c = colorClasses[tier.color];
           return (
             <div
               class={`group relative rounded-xl border-2 ${c.border} bg-gradient-to-b ${c.accent} to-transparent p-8 transition-all duration-500 ${c.hoverBorder} hover:shadow-2xl ${c.glow} ${
-                tier.highlight ? "md:scale-105 md:z-10" : ""
+                tier.highlight ? "border-mint-400/70 shadow-2xl shadow-mint-500/20 lg:scale-105 lg:z-10" : ""
               }`}
             >
               {tier.highlight && (
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-emerald-400/20 border border-emerald-400/50 rounded-full text-xs font-bold text-emerald-300">
-                  Most Popular
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-mint-400/20 border border-mint-400/50 rounded-full text-xs font-bold text-mint-300">
+                  Recommended
                 </div>
               )}
 
               <div class="mb-6">
                 <h3 class="text-2xl font-bold text-slate-100 mb-2">{tier.name}</h3>
                 <p class="text-slate-400 text-sm mb-3">{tier.targetAudience}</p>
-                <div class="flex items-baseline">
-                  <span class={`text-4xl font-bold ${c.text}`}>{tier.price}</span>
-                  <span class="text-slate-400 ml-2">one-time</span>
+                <div class="flex flex-wrap items-baseline gap-x-2">
+                  <span class={`whitespace-nowrap text-3xl font-bold xl:text-4xl ${c.text}`}>{tier.price}</span>
+                  <span class="text-slate-400">one-time</span>
                 </div>
               </div>
 
               <p class="text-slate-300 text-sm mb-8 leading-relaxed">{tier.description}</p>
+
+              {tier.featuresIntro && (
+                <p class="text-slate-200 text-sm font-semibold mb-4">{tier.featuresIntro}</p>
+              )}
 
               <ul class="space-y-3 mb-8">
                 {tier.features.map((feature) => (
@@ -87,35 +91,64 @@ const colorClasses = {
                 ))}
               </ul>
 
-              <a
-                href={PHONE_HREF}
-                class={`block w-full py-3 rounded-lg font-semibold text-center border-2 transition-all duration-300 focus:outline-none focus:ring-2 ${c.button}`}
-              >
-                Call Now: {PHONE_DISPLAY}
-              </a>
+              {tier.clientNote && (
+                <p class="-mt-4 mb-8 text-sm text-slate-400">{tier.clientNote}</p>
+              )}
+
+              <div class="space-y-3">
+                <a
+                  href={`/contact?tier=${tier.id}#contact`}
+                  class={`block w-full py-3 rounded-lg font-semibold text-center border-2 transition-all duration-300 focus:outline-none focus:ring-2 ${
+                    tier.highlight
+                      ? "border-transparent bg-gradient-to-r from-mint-500 to-teal-500 text-slate-950 shadow-lg shadow-mint-500/30 hover:shadow-mint-500/50 focus:ring-mint-400"
+                      : c.button
+                  }`}
+                >
+                  {tier.id === "custom" ? "Request a Custom Quote" : `Get Started with ${tier.name}`}
+                </a>
+                <a
+                  href={PHONE_HREF}
+                  class="block w-full py-2 text-center text-sm font-semibold text-slate-300 transition hover:text-slate-50"
+                >
+                  or call {PHONE_DISPLAY}
+                </a>
+              </div>
             </div>
           );
         })
       }
     </div>
 
-    <p class="mt-8 text-center text-sm text-slate-400">
-      Want ongoing updates and hosting handled for you? Ask about a <a href="/services/care-plan" class="text-emerald-300 hover:underline font-semibold">monthly care plan</a>, starting at {CARE_PLAN_PRICE} depending on scope.
+    <div class="mt-12 text-center">
+      <a
+        href="/services/web-design#quote-calculator"
+        class="inline-flex items-center gap-2 rounded-lg border-2 border-mint-400/60 bg-slate-900/60 px-6 py-3 font-semibold text-mint-200 transition hover:border-mint-300 hover:bg-mint-500/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+      >
+        Estimate your project with the quote calculator <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <p class="mt-8 text-center text-sm text-slate-300 max-w-3xl mx-auto">
+      Every package is a one-time project fee. You review the site before it goes live, and it's yours once it's paid in full.
     </p>
 
     <p class="mt-4 text-center text-sm text-slate-400">
-      Looking for something specific? <a href="/services" class="text-emerald-300 hover:underline font-semibold">Explore all services</a> — including e-commerce, local SEO, brand-aligned design, booking automation, and ongoing care plans.
+      Want ongoing updates and hosting handled for you? Ask about a <a href="/services/care-plan" class="text-mint-300 hover:underline font-semibold">monthly care plan</a>, starting at {CARE_PLAN_PRICE} depending on scope.
+    </p>
+
+    <p class="mt-4 text-center text-sm text-slate-400">
+      Looking for something specific? <a href="/services" class="text-mint-300 hover:underline font-semibold">Explore all services</a> — including e-commerce, local SEO, brand-aligned design, booking automation, and ongoing care plans.
     </p>
 
     <div class="mt-16 text-center">
       <div class="inline-block rounded-lg border border-slate-700/50 bg-slate-900/50 p-8 max-w-2xl">
         <h3 class="text-2xl font-bold text-slate-100 mb-4">Not sure which package fits?</h3>
         <p class="text-slate-300 mb-6">
-          Tell me about your business and I'll recommend the right one — no pressure, no upsell.
+          Tell us about your business and we'll recommend the right one — no pressure, no upsell.
         </p>
         <a
-          href={PHONE_HREF}
-          class="inline-block px-8 py-3 rounded-lg font-semibold bg-emerald-500/10 border border-emerald-400/50 text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+          href="/contact#contact"
+          class="inline-block px-8 py-3 rounded-lg font-semibold bg-mint-500/10 border border-mint-400/50 text-mint-300 hover:bg-mint-500/20 hover:border-mint-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-mint-400"
         >
           Schedule Your Consultation
         </a>

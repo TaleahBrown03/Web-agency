@@ -1,0 +1,75 @@
+---
+// DemoFrame.astro - Wraps a demo site with a "this is a demo" banner and the package it represents.
+// Package details come from data/pricing.ts so demos always match the current offers.
+import { TIER_BY_ID, type PricingTier } from '../../data/pricing';
+
+interface Props {
+  tierId: PricingTier['id'];
+  /** One line on what this demo shows beyond the package list, e.g. which pages are sections here. */
+  note?: string;
+}
+
+const { tierId, note } = Astro.props;
+const tier = TIER_BY_ID[tierId];
+---
+
+<div class="bg-slate-950 px-4 py-2.5 text-center text-sm text-slate-100">
+  <span class="font-semibold">Demo site</span> for a fictional business, showing the
+  <span class="font-semibold text-mint-300">{tier.name} package ({tier.price})</span>.
+  <a href="/portfolio" class="ml-1 font-semibold text-mint-300 underline underline-offset-2 hover:text-mint-200">Back to Orange County Webworks</a>
+</div>
+
+<slot />
+
+<aside class="border-t border-slate-800 bg-slate-950 px-4 py-12 text-slate-200 sm:px-6" aria-labelledby="demo-package-heading">
+  <div class="mx-auto max-w-5xl">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-mint-300">About this demo</p>
+    <h2 id="demo-package-heading" class="mt-2 text-2xl font-bold text-slate-50">What the {tier.name} package includes</h2>
+    <p class="mt-2 text-slate-300">{tier.description}</p>
+    {note && <p class="mt-2 text-slate-300">{note}</p>}
+    {tier.featuresIntro && <p class="mt-4 text-sm font-semibold text-slate-100">{tier.featuresIntro}</p>}
+    <ul class="mt-4 grid gap-2 sm:grid-cols-2">
+      {tier.features.map((feature) => (
+        <li class="flex items-start gap-2 text-sm text-slate-200">
+          <span class="text-mint-400" aria-hidden="true">✓</span>{feature}
+        </li>
+      ))}
+    </ul>
+    {tier.clientNote && <p class="mt-4 text-sm text-slate-400">{tier.clientNote}</p>}
+    <p class="mt-4 text-sm text-slate-400">
+      The business, prices, and contact details on this page are placeholders. Forms and booking here don't send anything.
+    </p>
+    <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+      <a
+        href={`/contact?tier=${tier.id}#contact`}
+        class="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-mint-400 to-teal-400 px-6 py-3 font-bold text-slate-950 transition hover:shadow-lg hover:shadow-mint-500/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+      >
+        {tier.priceMax === null ? 'Request a Custom Quote' : `Get Started with ${tier.name}`}
+      </a>
+      <a
+        href="/services/web-design#quote-calculator"
+        class="inline-flex items-center justify-center rounded-lg border-2 border-mint-400/60 px-6 py-3 font-semibold text-mint-200 transition hover:bg-mint-500/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-400"
+      >
+        Estimate your project
+      </a>
+    </div>
+  </div>
+</aside>
+
+<script>
+  // Demo forms never submit; they just show what the visitor would see.
+  function initDemoForms() {
+    document.querySelectorAll<HTMLFormElement>('form[data-demo-form]').forEach((form) => {
+      if (form.dataset.ready) return;
+      form.dataset.ready = 'true';
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        const status = form.querySelector<HTMLElement>('[data-demo-status]');
+        if (status) status.textContent = form.dataset.demoForm || 'Demo only: nothing was sent.';
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', initDemoForms);
+  document.addEventListener('astro:after-swap', initDemoForms);
+</script>

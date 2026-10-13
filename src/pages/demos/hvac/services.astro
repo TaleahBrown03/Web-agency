@@ -1,0 +1,24 @@
+---
+import HvacSite from '../../../components/demos/HvacSite.astro';
+
+const services = [
+  { name: 'Heating repair', detail: 'Diagnosis and repair for furnaces, boilers, and heat pumps.' },
+  { name: 'AC repair & installation', detail: 'Central air and ductless systems, from repairs to replacements.' },
+  { name: 'Seasonal maintenance', detail: 'Spring and fall tune-ups to catch problems before peak season.' },
+  { name: 'Thermostat upgrades', detail: 'Programmable and smart thermostat installation.' },
+];
+---
+
+<HvacSite title="Services" current="services">
+  <h1 class="text-4xl font-black tracking-tight">Services</h1>
+  <p class="mt-4 max-w-2xl text-lg text-slate-600">Each service has its own clear description, so customers can find what they need and book it.</p>
+  <div class="mt-10 grid gap-5 sm:grid-cols-2">
+    {services.map((s) => (
+      <div class="rounded-2xl border border-slate-200 bg-white p-6">
+        <h2 class="text-xl font-bold">{s.name}</h2>
+        <p class="mt-2 text-slate-600">{s.detail}</p>
+        <a href="/demos/hvac/book" class="mt-4 inline-block font-semibold text-sky-800 hover:underline">Book this service →</a>
+      </div>
+    ))}
+  </div>
+</HvacSite>

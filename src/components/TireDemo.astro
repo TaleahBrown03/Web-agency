@@ -1,80 +1,145 @@
 ---
-const vehicleOptions = ["Year", "Make", "Model"];
-const highlights = ["Performance tires", "All-season options", "Brake service"];
+// TireDemo.astro - Custom package demo: features a Custom project can include
+// (tire finder + online payment, live booking with calendar availability, SMS alert + CRM record).
+import { DEMO_PHONE_DISPLAY, DEMO_PHONE_HREF } from '../data/demos';
+
+const years = ['2024', '2023', '2022', '2021'];
+const makes = ['Ford', 'Honda', 'Toyota', 'Subaru'];
+const models = ['Sedan', 'SUV', 'Pickup'];
+const tires = [
+  { name: 'All-Season Touring', size: '225/65R17', price: '$149 / tire' },
+  { name: 'All-Weather Plus', size: '225/65R17', price: '$179 / tire' },
+];
+const slots = [
+  { day: 'Mon', time: '9:00 AM', open: true },
+  { day: 'Mon', time: '11:00 AM', open: false },
+  { day: 'Tue', time: '8:30 AM', open: true },
+  { day: 'Tue', time: '1:00 PM', open: true },
+  { day: 'Wed', time: '10:00 AM', open: false },
+  { day: 'Wed', time: '2:30 PM', open: true },
+];
+const behindScenes = [
+  { title: 'Instant text alert', detail: 'The shop gets a text with the customer, vehicle, and time the moment a booking comes in.' },
+  { title: 'Calendar sync', detail: "Booked times come off the shop's real calendar, so there's no double-booking." },
+  { title: 'CRM record', detail: 'The customer and their vehicle are saved to the CRM for follow-up and reminders.' },
+];
+const select =
+  'mt-1 w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30';
+const primary =
+  'inline-flex w-full items-center justify-center rounded-xl bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950';
 ---
 
 <div class="min-h-screen bg-zinc-950 text-zinc-100">
-  <header class="border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
-    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-5 sm:flex-row sm:items-center sm:justify-between lg:px-8">
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.34em] text-cyan-400">Orange County Auto</p>
-        <h1 class="text-xl font-black tracking-wide text-white">RACE READY SERVICE</h1>
-      </div>
-      <div class="flex flex-wrap items-center gap-3">
-        <a href="tel:+18454459268" class="inline-flex items-center rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-sm font-semibold text-cyan-300 transition duration-300 hover:border-cyan-400 hover:bg-cyan-500/20 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-zinc-950 active:scale-[0.99]">
-          Call Now
-        </a>
-        <a href="#quote" class="inline-flex items-center rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-300 transition duration-300 hover:border-red-400 hover:bg-red-500/20 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-zinc-950 active:scale-[0.99]">
-          Book Service
-        </a>
-      </div>
+  <header class="border-b border-zinc-800">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5 lg:px-8">
+      <p class="text-lg font-black tracking-[0.15em]">EXAMPLE TIRE &amp; AUTO</p>
+      <nav aria-label="Page sections" class="flex flex-wrap gap-2 text-sm font-semibold">
+        <a href="#tires" class="rounded-full border border-zinc-700 px-4 py-2 hover:border-cyan-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400">Shop Tires</a>
+        <a href="#book" class="rounded-full border border-zinc-700 px-4 py-2 hover:border-cyan-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400">Book Service</a>
+        <a href={DEMO_PHONE_HREF} class="rounded-full bg-red-600 px-4 py-2 text-white hover:bg-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400">Call {DEMO_PHONE_DISPLAY}</a>
+      </nav>
     </div>
   </header>
 
-  <main class="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 lg:px-8 lg:py-24">
-    <section class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-      <div class="space-y-8">
-        <div class="inline-flex items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-300">
-          Precision service for daily drivers and weekend performance builds
-        </div>
-        <div class="space-y-5">
-          <h2 class="max-w-3xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Orange County's Trusted Tire & Auto Repair Experts
-          </h2>
-          <p class="max-w-2xl text-lg leading-8 text-zinc-400">
-            From rapid tire replacements to full diagnostics, our team combines premium parts, aggressive attention to detail, and high-performance service standards.
-          </p>
-        </div>
-        <div class="flex flex-wrap gap-3">
-          {highlights.map((item) => (
-            <span class="rounded-full border border-zinc-800 bg-zinc-900/70 px-4 py-2 text-sm font-medium text-zinc-300">
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
+  <main class="mx-auto max-w-6xl space-y-16 px-6 py-14 lg:px-8 lg:py-20">
+    <section>
+      <h1 class="max-w-3xl text-4xl font-black leading-tight tracking-tight sm:text-5xl">Find tires, pay online, and book your install</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-8 text-zinc-300">
+        Tires, alignments, and repairs. Find the right tires for your vehicle, pay a deposit online, and pick an install time that's actually open.
+      </p>
+    </section>
 
-      <div id="quote" class="rounded-[2rem] border border-zinc-800 bg-zinc-900/90 p-8 shadow-[0_30px_120px_-40px_rgba(34,211,238,0.2)]">
-        <div class="space-y-6">
-          <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-400">Vehicle match</p>
-            <h3 class="mt-3 text-3xl font-semibold text-white">Find the right fit fast</h3>
-          </div>
-          <div class="grid gap-4 sm:grid-cols-3">
-            {vehicleOptions.map((option) => (
-              <label class="block text-sm font-medium text-zinc-300">
-                <span class="mb-2 block">{option}</span>
-                <div class="flex items-center justify-between rounded-2xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-zinc-300 transition duration-300 hover:border-cyan-500/40">
-                  <span>Select</span>
-                  <span class="text-cyan-400">▾</span>
-                </div>
+    <section id="tires" class="grid gap-8 lg:grid-cols-2" aria-labelledby="tires-heading">
+      <form id="tireFinder" class="rounded-2xl border border-zinc-800 bg-zinc-900 p-6 sm:p-8">
+        <h2 id="tires-heading" class="text-2xl font-bold">Tire finder</h2>
+        <div class="mt-5 grid gap-4 sm:grid-cols-3">
+          <label class="text-sm font-semibold text-zinc-300">Year
+            <select required name="year" class={select}><option value="">Select</option>{years.map((y) => <option>{y}</option>)}</select>
+          </label>
+          <label class="text-sm font-semibold text-zinc-300">Make
+            <select required name="make" class={select}><option value="">Select</option>{makes.map((m) => <option>{m}</option>)}</select>
+          </label>
+          <label class="text-sm font-semibold text-zinc-300">Type
+            <select required name="model" class={select}><option value="">Select</option>{models.map((m) => <option>{m}</option>)}</select>
+          </label>
+        </div>
+        <button type="submit" class={`mt-6 ${primary}`}>Show Matching Tires</button>
+      </form>
+
+      <div id="tireResults" hidden class="rounded-2xl border border-zinc-800 bg-zinc-900 p-6 sm:p-8" tabindex="-1" aria-labelledby="results-heading">
+        <h2 id="results-heading" class="text-2xl font-bold">Matching tires</h2>
+        <form data-demo-form="Demo only: no payment was taken. A real Custom build would open a secure checkout for the deposit." class="mt-5 space-y-3">
+          {tires.map((t, i) => (
+            <label class="flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-zinc-700 p-4 has-[:checked]:border-cyan-400 has-[:checked]:bg-cyan-500/10 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-cyan-400">
+              <span class="flex items-center gap-3">
+                <input type="radio" name="tire" value={t.name} required={i === 0} class="h-4 w-4 accent-cyan-400" />
+                <span><span class="block font-semibold">{t.name}</span><span class="block text-sm text-zinc-400">{t.size}</span></span>
+              </span>
+              <span class="font-bold text-cyan-300">{t.price}</span>
+            </label>
+          ))}
+          <button type="submit" class={primary}>Reserve Set &amp; Pay Deposit</button>
+          <p data-demo-status role="status" class="text-sm font-semibold text-cyan-200"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="book" aria-labelledby="book-heading">
+      <h2 id="book-heading" class="text-2xl font-bold">Book an install or service</h2>
+      <p class="mt-2 text-zinc-400">Times come straight from the shop's calendar. Booked slots can't be picked.</p>
+      <form data-demo-form="Demo only: in a real Custom build, this books the slot on the shop's calendar and texts the shop right away." class="mt-6 rounded-2xl border border-zinc-800 bg-zinc-900 p-6 sm:p-8">
+        <fieldset>
+          <legend class="sr-only">Available times</legend>
+          <div class="grid gap-2 sm:grid-cols-3">
+            {slots.map((s, i) => (
+              <label class:list={[
+                'flex items-center justify-between rounded-xl border px-4 py-3 text-sm font-semibold',
+                s.open
+                  ? 'cursor-pointer border-zinc-700 has-[:checked]:border-cyan-400 has-[:checked]:bg-cyan-500/10 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-cyan-400'
+                  : 'cursor-not-allowed border-zinc-800 text-zinc-500 line-through',
+              ]}>
+                <span class="flex items-center gap-2">
+                  <input type="radio" name="slot" value={`${s.day} ${s.time}`} disabled={!s.open} required={i === 0} class="h-4 w-4 accent-cyan-400" />
+                  {s.day} {s.time}
+                </span>
+                <span class="text-xs">{s.open ? 'Open' : 'Booked'}</span>
               </label>
             ))}
           </div>
-          <button class="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-500 to-red-500 px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-zinc-950 active:scale-[0.99]">
-            Build My Service Quote
-          </button>
-        </div>
+        </fieldset>
+        <button type="submit" class={`mt-6 ${primary}`}>Book This Time</button>
+        <p data-demo-status role="status" class="mt-3 text-sm font-semibold text-cyan-200"></p>
+      </form>
+    </section>
+
+    <section aria-labelledby="behind-heading" class="rounded-2xl border border-cyan-500/30 bg-cyan-500/5 p-6 sm:p-8">
+      <h2 id="behind-heading" class="text-2xl font-bold">Behind the scenes</h2>
+      <p class="mt-2 text-zinc-300">What the shop owner gets when a customer books. Customers don't see this part.</p>
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        {behindScenes.map((b) => (
+          <div class="rounded-xl border border-zinc-800 bg-zinc-900 p-5">
+            <h3 class="font-bold text-cyan-200">{b.title}</h3>
+            <p class="mt-2 text-sm text-zinc-300">{b.detail}</p>
+          </div>
+        ))}
       </div>
     </section>
   </main>
-
-  <footer class="border-t border-zinc-800 bg-zinc-950/70">
-    <div class="mx-auto flex flex-col gap-6 px-6 py-10 text-center text-sm text-zinc-400 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-      <p>High-performance repairs and tire services for Orange County drivers.</p>
-      <a href="tel:+18454459268" class="inline-flex items-center justify-center rounded-full border border-cyan-500/30 bg-cyan-500/10 px-6 py-3 font-semibold text-cyan-300 transition duration-300 hover:border-cyan-400 hover:bg-cyan-500/20 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-zinc-950 active:scale-[0.99]">
-        Call (845) 445-9268
-      </a>
-    </div>
-  </footer>
 </div>
+
+<script>
+  function initTireFinder() {
+    const finder = document.getElementById('tireFinder');
+    const results = document.getElementById('tireResults');
+    if (!(finder instanceof HTMLFormElement) || !results || finder.dataset.ready) return;
+    finder.dataset.ready = 'true';
+    finder.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!finder.reportValidity()) return;
+      results.hidden = false;
+      results.focus();
+    });
+  }
+  document.addEventListener('DOMContentLoaded', initTireFinder);
+  document.addEventListener('astro:after-swap', initTireFinder);
+</script>

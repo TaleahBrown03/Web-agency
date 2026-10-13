@@ -1,8 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import DemoFrame from '../../components/demos/DemoFrame.astro';
 import TireDemo from '../../components/TireDemo.astro';
 ---
 
-<Layout title="Automotive Tire Demo | Orange County Webworks" description="High-performance automotive tire and repair experience for local shops and service brands.">
-  <TireDemo />
+<Layout title="Tire & Auto Demo | Orange County Webworks" description="Demo of features a Custom project can include, for a fictional tire and auto shop." noindex>
+  <DemoFrame tierId="custom" note="Custom projects are scoped individually. This demo shows a few features a Custom project can include: a tire finder with online payment, live booking against real availability, and what happens behind the scenes when someone books.">
+    <TireDemo />
+  </DemoFrame>
 </Layout>
